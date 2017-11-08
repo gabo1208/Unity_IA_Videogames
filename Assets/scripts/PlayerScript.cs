@@ -5,10 +5,8 @@ public class PlayerScript : MonoBehaviour {
     public float jumpSpeed = 10.0f;
     public float initx;
     public float inity;
-    public float time = 1.0f;
-    public float jumpRate = 0.5f;
     public Vector3 velocity;
-    private bool jumping = false;
+    public bool jumping = false;
     private Vector3 gravity;
     public Rigidbody rb;
 
@@ -44,17 +42,14 @@ public class PlayerScript : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.Space) && !jumping){
             jumping = true;
             rb.velocity += jumpSpeed * -new Vector3(0, 0, 1);
-        }
-
-        if (transform.position.z > -0.6){
+        }else if (transform.position.z > -0.6){
             jumping = false;
             transform.localScale = new Vector3(initx, inity, 1);
         }
 
-        transform.localScale = new Vector3(initx - transform.position.z / 2.5f, inity - transform.position.z / 2.5f, 1);
-
-        if (transform.position.z <= -2.5){
-            rb.velocity = new Vector3(rb.velocity.x, rb.velocity.y, 10);
+        if (transform.position.z >= -1.6 && jumping)
+        {
+            transform.localScale = new Vector3(initx - transform.position.z / 2.5f, inity - transform.position.z / 2.5f, 1);
         }
     }
 }

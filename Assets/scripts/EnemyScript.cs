@@ -1,7 +1,9 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using System.Collections.Generic;
 
-public class EnemyScript : MonoBehaviour {
+public class EnemyScript : MonoBehaviour
+{
     public float initx;
     public float inity;
     public float angSpeed = 5f;
@@ -11,87 +13,118 @@ public class EnemyScript : MonoBehaviour {
     public float stop = 1f;
     public float breaking = 4.0f;
     public GameObject player;
-    public Text comportamiento;
+    public float distanceVel = 0f;
+    public float separateThreshold = 0f;
+    public float pathThreshold = 0f;
+    public float collitionThreshold = 0f;
 
     private WeaponScript weapon;
     private PlayerScript playerS;
-    private int switcher = 0;
+    public int switcher = 0;
     private float canTurn = 0.0f;
     private float maxAngle = 45.0f;
     private float angle = 0f;
+    public GameObject[] path;
+    private int pathIndex = 0;
+    private GameObject[] closers;
+    private Vector3 direction, target;
 
-    private void Start(){
+    private void Start()
+    {
         initx = transform.localScale.x;
         inity = transform.localScale.y;
         player = GameObject.Find("Player");
-
+        closers = GameObject.FindGameObjectsWithTag("Enemies");
         playerS = player.GetComponent<PlayerScript>();
         weapon = GetComponentInChildren<WeaponScript>();
         weapon.enabled = false;
 
     }
 
-    private void OnTriggerEnter2D(Collider2D collision){
-        collision.gameObject.transform.localScale = new Vector3(initx + 0.3f, inity + 0.3f,0f);
-    }
+    private void Update()
+    {
+        if (switcher != 9)
+        {
+            target = player.transform.position;
+            direction = target - transform.position;
+        }
 
-    private void OnTriggerExit2D(Collider2D collision){
-        collision.gameObject.transform.localScale = new Vector3(initx, inity, 0f);
-    }
-
-    private void Update(){
-        var target = player.transform.position;
-        Vector3 distance = target - transform.position;
-
-        if (Input.GetKey(KeyCode.LeftControl)){
-            if (Input.GetKey(KeyCode.Q)){
-                switcher = 5;
-                comportamiento.text = "Movimiento simple";
-            }else if(Input.GetKey(KeyCode.W)){
+        if (Input.GetKey(KeyCode.LeftControl))
+        {
+            if (Input.GetKey(KeyCode.Q))
+            {
                 switcher = 2;
-                comportamiento.text = "Encarar";
+                //comportamiento.text = "Encarar";
             }
-            else if (Input.GetKey(KeyCode.E)){
+            else if (Input.GetKey(KeyCode.W))
+            {
                 switcher = 3;
-                comportamiento.text = "Buscar y encarar";
+                //comportamiento.text = "Buscar y encarar";
             }
-            else if (Input.GetKey(KeyCode.T)){
+            else if (Input.GetKey(KeyCode.E))
+            {
                 switcher = 4;
-                comportamiento.text = "Merodear";
+                //comportamiento.text = "Merodear";
             }
-            else if (Input.GetKey(KeyCode.A)){
+            else if (Input.GetKey(KeyCode.A))
+            {
                 switcher = 1;
-                comportamiento.text = "Alinear";
+                //comportamiento.text = "Alinear";
             }
-            else if (Input.GetKeyDown(KeyCode.U)){
+            else if (Input.GetKeyDown(KeyCode.T))
+            {
                 weapon.enabled = !weapon.enabled;
-            }else if (Input.GetKey(KeyCode.D)){
+            }
+            else if (Input.GetKey(KeyCode.D))
+            {
                 switcher = 0;
-                comportamiento.text = "Estacionario";
+                //comportamiento.text = "Estacionario";
             }
-            else if (Input.GetKey(KeyCode.I)){
+            else if (Input.GetKey(KeyCode.Z))
+            {
                 switcher = 6;
-                comportamiento.text = "Busqueda dinámica";
+                //comportamiento.text = "Busqueda dinámica";
             }
-            else if (Input.GetKey(KeyCode.Z)){
+            else if (Input.GetKey(KeyCode.X))
+            {
                 switcher = 7;
-                comportamiento.text = "Imitar";
+                //comportamiento.text = "Imitar";
+            }
+            else if (Input.GetKey(KeyCode.C))
+            {
+                switcher = 8;
+                //comportamiento.text = "Pursue";
+            }
+            else if (Input.GetKey(KeyCode.G))
+            {
+                switcher = 9;
+                //comportamiento.text = "Follow Path";
             }
         }
 
-        if (weapon.enabled){
+        if (weapon.enabled)
+        {
             shoot();
         }
 
-        collitionRays(distance);
+        separation();
+        controlVelocity(direction);
+        collitionRays(direction);
 
-        switch (switcher){
+        switch (switcher)
+        {
+            case 9:
+                pathFollowing();
+                break;
+            case 8:
+                pursue(direction);
+                break;
             case 7:
                 align();
                 alignVeloc();
                 break;
             case 6:
-                facing(distance);
+                faceTo(direction);
                 dynamicSeek();
                 break;
             case 5:
@@ -102,11 +135,11 @@ public class EnemyScript : MonoBehaviour {
                 wander();
                 break;
             case 3:
-                kinematicSeek(distance);
-                facing(distance);
+                kinematicSeek(direction);
+                faceTo(direction);
                 break;
             case 2:
-                facing(distance);
+                faceTo(direction);
                 break;
             case 1:
                 align();
@@ -116,93 +149,226 @@ public class EnemyScript : MonoBehaviour {
         }
     }
 
-    private void wander(){
+    // Wander movement
+    private void wander()
+    {
         velocity = 2;
-        if (canTurn > 0.0f) {
+        if (canTurn > 0.0f)
+        {
             canTurn -= Time.deltaTime;
-        } else {
+        }
+        else
+        {
             // cambiar dirección
             angle = Mathf.Deg2Rad * Random.Range(-maxAngle, maxAngle);
             canTurn = 2.0f;
         }
-        transform.up += new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0) * velocity * Time.deltaTime;
+        faceTo(new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0) * Time.deltaTime);
         transform.position += transform.up * velocity * Time.deltaTime;
     }
-    private void shoot(){
-        if (weapon != null && weapon.enabled && weapon.canAttack){
+
+    // Shoot mechanism
+    private void shoot()
+    {
+        if (weapon != null && weapon.enabled && weapon.canAttack)
+        {
             weapon.Attack(true);
         }
     }
 
-    private void dynamicSeek(){
+    // Dynamic seek movement
+    private void dynamicSeek()
+    {
         transform.position += transform.up * velocity * Time.deltaTime;
     }
 
-    private void kinematicSeek(Vector3 distance){
-        
-        if (distance.magnitude >= stop){
-            transform.position += distance * Time.deltaTime;
+    // Dynamic flee movement
+    private void dynamicFlee()
+    {
+        transform.position += -transform.up * velocity * Time.deltaTime;
+    }
+
+    // Kinematic seek movement
+    private void kinematicSeek(Vector3 direction)
+    {
+
+        if (direction.magnitude >= stop)
+        {
+            transform.position += direction * Time.deltaTime;
         }
     }
 
-    private void facing(Vector3 distance){
-        float angle = Mathf.Atan2(-distance.x, distance.y) * Mathf.Rad2Deg;
+    // Face to 
+    private void faceTo(Vector3 direction)
+    {
+        float angle = Mathf.Atan2(-direction.x, direction.y) * Mathf.Rad2Deg;
         Quaternion q = Quaternion.AngleAxis(angle, Vector3.forward);
         transform.rotation = Quaternion.Slerp(transform.rotation, q, Time.deltaTime * angSpeed);
     }
-    private void simpleMove(Vector3 move){
+
+    // Simple Move
+    private void simpleMove(Vector3 move)
+    {
         transform.position += move * velocity * Time.deltaTime;
     }
 
-    private void controlVelocity(Vector3 facingDir){
-        if (facingDir.magnitude > breaking){
-            facingDir.Normalize();
-            velocity += 1;
-            if (velocity > maxSpeed){
+    // Control velocity for character
+    private void controlVelocity(Vector3 faceToDir)
+    {
+        if (faceToDir.magnitude > breaking)
+        {
+            faceToDir.Normalize();
+            velocity += 1 * Time.deltaTime;
+            if (velocity > maxSpeed)
+            {
                 velocity = maxSpeed;
             }
-        }else if (facingDir.magnitude > stop){
-            facingDir.Normalize();
-            velocity -= 1;
-            if (velocity < minSpeed){
+        }
+        else if (faceToDir.magnitude > stop)
+        {
+            faceToDir.Normalize();
+            velocity -= 1 * Time.deltaTime;
+            if (velocity < minSpeed)
+            {
                 velocity = minSpeed;
             }
-        }else{
-            velocity = 0.0f;
+        }
+        else
+        {
+            if (velocity <= 0) {
+                velocity = 0.0f;
+            }
+            else
+            {
+                velocity -= 2 * Time.deltaTime;
+            }
         }
     }
 
-    private void align(){
+    // faceTo align to target
+    private void align()
+    {
         transform.rotation = Quaternion.Slerp(transform.rotation, player.transform.rotation, Time.deltaTime * angSpeed);
     }
 
-    private void alignVeloc(){
+    // Velocity align to target
+    private void alignVeloc()
+    {
         transform.position += playerS.velocity * Time.deltaTime;
     }
 
-    private void collitionRays(Vector3 distance) {
+    // Pursue movement
+    private void pursue(Vector3 direction)
+    {
+        float distance = direction.magnitude;
+        float maxPrediction = 3;
+        float prediction;
+        Vector3 newPos;
+        //Check if speed is too small to give a reasonable prediction time
+        if (velocity <= distance / maxPrediction)
+        {
+            prediction = maxPrediction;
+            //Otherwise calculate the prediction time
+        }
+        else
+        {
+            prediction = distance / velocity;
+        }
+        //Put the target together
+
+        newPos = player.transform.position + playerS.velocity * prediction;
+        direction = newPos - transform.position;
+        //Delegate to seek  
+        faceTo(direction);
+        dynamicSeek();
+    }
+
+    public void pathFollowing()
+    {
+        if (pathIndex < path.Length)
+        {
+            target = path[pathIndex].transform.position;
+            direction = target - transform.position;
+            if (direction.magnitude > pathThreshold)
+            {
+                faceTo(direction);
+                dynamicSeek();
+            }
+            else
+            {
+                pathIndex++;
+            }
+        }
+    }
+
+    private void separation()
+    {
+        float strength = 0f;
+        float distance = 0f;
+        Vector3 direction = new Vector3(0,0,0);
+        for (var i = 0; i < closers.Length; i++)
+        {
+            if (closers[i].transform != transform)
+            {
+                direction = closers[i].transform.position - transform.position;
+                distance = direction.magnitude;
+                if (distance < separateThreshold)
+                {
+                    strength = Mathf.Min(distanceVel / (distance * distance), maxSpeed);
+                    direction.Normalize();
+                    //faceTo(-direction);
+                    transform.position += -direction * strength * Time.deltaTime;
+
+                }
+            }
+        }
+    }
+
+    private void separateFromTarget(Vector3 target)
+    {
+        float strength = 0f;
+        Vector3 direction = target - transform.position;
+        float distance = direction.magnitude;
+        if (distance < collitionThreshold)
+        {
+            strength = Mathf.Min(distanceVel / (distance * distance), maxSpeed);
+            direction.Normalize();
+            faceTo(-direction);
+            transform.position += -direction * strength * Time.deltaTime;
+        }
+    }
+
+    // Collition detection
+    private void collitionRays(Vector3 direction){
         float cosadd = 0.349066f, sinadd = 0.349066f;
-        int lm = 1 << LayerMask.NameToLayer("Objects"), dir = 0, dir2 = 0;
+        int lm = 1 << LayerMask.NameToLayer("Objects");
         Vector3 leftD, rightD;
         RaycastHit hitl, hit, hitr;
 
         // Ajuste de angulos para los rayos de colision
-        if (transform.up.x < 0 && transform.up.y > 0) {
+        if (transform.up.x < 0 && transform.up.y > 0)
+        {
             leftD = new Vector3(Mathf.Cos(Mathf.Acos(transform.up.x) + cosadd),
                 Mathf.Sin(Mathf.Asin(transform.up.y) - sinadd), 0);
             rightD = new Vector3(Mathf.Cos(Mathf.Acos(transform.up.x) - cosadd),
                 Mathf.Sin(Mathf.Asin(transform.up.y) + sinadd), 0);
-        }else if(transform.up.y < 0 && transform.up.x > 0) {
+        }
+        else if (transform.up.y < 0 && transform.up.x > 0)
+        {
             leftD = new Vector3(Mathf.Cos(Mathf.Acos(transform.up.x) - cosadd),
                 Mathf.Sin(Mathf.Asin(transform.up.y) + sinadd), 0);
             rightD = new Vector3(Mathf.Cos(Mathf.Acos(transform.up.x) + cosadd),
                 Mathf.Sin(Mathf.Asin(transform.up.y) - sinadd), 0);
-        }else if (transform.up.x <= 0) {
+        }
+        else if (transform.up.x <= 0)
+        {
             leftD = new Vector3(Mathf.Cos(Mathf.Acos(transform.up.x) - cosadd),
                 Mathf.Sin(Mathf.Asin(transform.up.y) - sinadd), 0);
             rightD = new Vector3(Mathf.Cos(Mathf.Acos(transform.up.x) + cosadd),
                 Mathf.Sin(Mathf.Asin(transform.up.y) + sinadd), 0);
-        }else{
+        }
+        else
+        {
             leftD = new Vector3(Mathf.Cos(Mathf.Acos(transform.up.x) + cosadd),
                 Mathf.Sin(Mathf.Asin(transform.up.y) + sinadd), 0);
             rightD = new Vector3(Mathf.Cos(Mathf.Acos(transform.up.x) - cosadd),
@@ -210,62 +376,39 @@ public class EnemyScript : MonoBehaviour {
         }
 
         // Left ray collides
-        if (Physics.Raycast(transform.position, leftD, out hitl, 2f, lm)){
+        if (Physics.Raycast(transform.position, leftD, out hitl, 2f, lm))
+        {
             Debug.DrawRay(transform.position, leftD * 2, Color.red);
             Debug.DrawRay(transform.position, hitl.normal * 2.5f, Color.blue);
-            dir2 = -1;
-        }else{
+            separateFromTarget(hitl.point);
+        }
+        else
+        {
             Debug.DrawRay(transform.position, leftD * 2, Color.green);
-            dir = 1;
         }
 
         // Rigth ray collides
-        if (Physics.Raycast(transform.position, rightD, out hitr, 2f, lm)){
+        if (Physics.Raycast(transform.position, rightD, out hitr, 2f, lm))
+        {
             Debug.DrawRay(transform.position, rightD * 2, Color.red);
             Debug.DrawRay(transform.position, hitr.normal * 2.5f, Color.blue);
-            dir2 = -2;
-        }else{
-            Debug.DrawRay(transform.position, rightD * 2, Color.green);
-            dir = 2;
+            separateFromTarget(hitr.point);
         }
-        
+        else
+        {
+            Debug.DrawRay(transform.position, rightD * 2, Color.green);
+        }
+
         // Center ray collides
-        if (Physics.Raycast(transform.position, transform.up, out hit, 2.5f, lm)){
+        if (Physics.Raycast(transform.position, transform.up, out hit, 2.5f, lm))
+        {
             Debug.DrawRay(transform.position, transform.up * 2.5f, Color.red);
             Debug.DrawRay(transform.position, hit.normal * 2.5f, Color.blue);
-            if(dir == 0){
-                dir = -3;
-            }
-        }else{
+            separateFromTarget(hit.point);
+        }
+        else
+        {
             Debug.DrawRay(transform.position, transform.up * 2.5f, Color.green);
-            dir = 3;
         }
-       
-        if (dir == 1 || dir2 == -2){
-            angSpeed = 0;
-            transform.up = leftD * Time.deltaTime;
-            transform.position += transform.up * 2 * Time.deltaTime;
-            velocity = 0;
-        }
-        else if(dir == 2 || dir2 == -1){
-            angSpeed = 0;
-            transform.up = rightD * Time.deltaTime;
-            transform.position += transform.up *2 * Time.deltaTime;
-            velocity = 0;
-        }else if (dir < 0){
-            velocity = 0;
-        }else {
-            angSpeed = 3;
-            if (switcher > 4){
-                controlVelocity(distance);
-            }
-        }
-    }
-
-    private void behaviors(){
-        //var move = new Vector3(Random.Range(-10.0f, 10.0f), Random.Range(-10.0f, 10.0f), 0);
-        //transform.position += move * speed * Time.deltaTime;
-        // Orientar hacia el target Inmediata
-        //transform.rotation = Quaternion.AngleAxis(angulo, Vector3.forward);
     }
 }
