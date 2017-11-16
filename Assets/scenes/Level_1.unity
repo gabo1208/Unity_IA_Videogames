@@ -1201,8 +1201,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startNode: {fileID: 1519095652}
-  endNode: {fileID: 1245749376}
   pathColor: {r: 1, g: 0, b: 0, a: 1}
+  pathThreshold: 2
 --- !u!1 &160020736
 GameObject:
   m_ObjectHideFlags: 0
@@ -3687,7 +3687,7 @@ Prefab:
         type: 2}
       propertyPath: endNode
       value: 
-      objectReference: {fileID: 59089604}
+      objectReference: {fileID: 2007121600}
     - target: {fileID: 114118882840800522, guid: fd06d864a78bd9a4980a748dd6c36703,
         type: 2}
       propertyPath: pathColor.r
@@ -6993,8 +6993,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startNode: {fileID: 1609109182}
-  endNode: {fileID: 45403543}
   pathColor: {r: 1, g: 0, b: 0, a: 1}
+  pathThreshold: 2
 --- !u!4 &1817574880
 Transform:
   m_ObjectHideFlags: 0
@@ -7002,7 +7002,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1817574878}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.7422237, y: 1.2415154, z: -2.5168886}
+  m_LocalPosition: {x: -7.7422237, y: 1.2415154, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children:
   - {fileID: 1609109183}

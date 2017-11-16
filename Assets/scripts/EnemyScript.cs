@@ -24,10 +24,10 @@ public class EnemyScript : MonoBehaviour
     private float canTurn = 0.0f;
     private float maxAngle = 45.0f;
     private float angle = 0f;
-    public GameObject[] path;
-    private int pathIndex = 0;
+    public List<GameObject> path;
     private GameObject[] closers;
     private Vector3 direction, target;
+    private NavMeshScript navmeshScript;
 
     private void Start()
     {
@@ -38,7 +38,7 @@ public class EnemyScript : MonoBehaviour
         playerS = player.GetComponent<PlayerScript>();
         weapon = GetComponentInChildren<WeaponScript>();
         weapon.enabled = false;
-
+        navmeshScript = GetComponent<NavMeshScript>();
     }
 
     private void Update()
@@ -109,7 +109,7 @@ public class EnemyScript : MonoBehaviour
 
         separation();
         controlVelocity(direction);
-        collitionRays(direction);
+        //collitionRays(direction);
 
         switch (switcher)
         {
@@ -285,9 +285,9 @@ public class EnemyScript : MonoBehaviour
 
     public void pathFollowing()
     {
-        if (pathIndex < path.Length)
+        if (path.Count > 0)
         {
-            target = path[pathIndex].transform.position;
+            target = path[0].transform.position;
             direction = target - transform.position;
             if (direction.magnitude > pathThreshold)
             {
@@ -296,7 +296,13 @@ public class EnemyScript : MonoBehaviour
             }
             else
             {
-                pathIndex++;
+                if (path.Count > 0)
+                {
+                    path[0].GetComponent<NodeScript>().active = true;
+                    path.RemoveAt(0);
+                }
+
+                navmeshScript.removeFirstInPath();
             }
         }
     }

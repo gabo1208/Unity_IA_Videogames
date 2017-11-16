@@ -4,37 +4,47 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class NavMeshScript : MonoBehaviour {
-    public GameObject startNode, endNode;
+    public GameObject startNode;
     public Color pathColor = Color.red;
+    public float pathThreshold = 2f;
 
     private GameObject[] nodes;
     private List<GameObject> nodes_rays;
     private LinkedList<GameObject> path = new LinkedList<GameObject>();
+    private GameObject target, endNode;
+    private EnemyScript movementScript;
+    private int n_nodes;
+    private float[] gCost;
+    private Dictionary<GameObject, float> fScore;
 
     // Use this for initialization
     private void Start () {
+        endNode = startNode;
         nodes = GameObject.FindGameObjectsWithTag("Node");
         nodes_rays = new List<GameObject>(nodes);
-        EnemyScript movementScript = GetComponent<EnemyScript>();
-        if (startNode != null && endNode != null)
-        {
-            nodes_rays.Add(endNode);
-            Astar(startNode, endNode);
-            GameObject[] path_array = new GameObject[path.Count];
-            int count = 0;
-            foreach (var node in path)
-            {
-                path_array[count] = node;
-                count++;
-            }
-            movementScript.path = path_array;
-            movementScript.switcher = 9;
-        }
+        movementScript = GetComponent<EnemyScript>();
+        target = GameObject.Find("Player");
+        n_nodes = nodes.Length;
+        gCost = new float[n_nodes];
+        fScore = new Dictionary<GameObject, float>();
     }
 
     // Update is called once per frame
     private void Update()
     {
+        if (startNode != null && endNode != null && heuristic(startNode) > pathThreshold)
+        {
+            // This one follows the exact optimum path to the target, every point that it has been along the way
+            //Astar(endNode);
+
+            // This modifies the path each time the target position change closer to other node
+            Astar(startNode);
+
+            movementScript.path = new List<GameObject>(path);
+
+            movementScript.switcher = 9;
+        }
+
         // Draw Graph conections
         foreach (var node in nodes_rays)
         {
@@ -43,11 +53,10 @@ public class NavMeshScript : MonoBehaviour {
                 if (path.Contains(obj) && path.Contains(node))
                 {
                     // Deactivate a node if it is in any path
-                    node.GetComponent<NodeScript>().active = false;
                     Debug.DrawRay(node.transform.position, obj.transform.position - node.transform.position, pathColor);
                 }
                 // Draw a Green line for every active conection between active nodes
-                else if(node.GetComponent<NodeScript>().active)
+                else if(node.GetComponent<NodeScript>().active || path.Contains(node))
                 {
                     Debug.DrawRay(node.transform.position, obj.transform.position - node.transform.position, Color.green);
                 }
@@ -60,21 +69,19 @@ public class NavMeshScript : MonoBehaviour {
     // A* heuristic function
     private float heuristic(GameObject node)
     {
-        return (endNode.transform.position - node.transform.position).magnitude;
+        return (target.transform.position - node.transform.position).magnitude;
     }
 
     // A* algorith
-    public void Astar(GameObject start, GameObject end)
+    public void Astar(GameObject start)
     {
-        int n_nodes = nodes.Length;
         List<GameObject> closedSet = new List<GameObject>();
-        List<GameObject> openSet = new List<GameObject>() { start };
-        GameObject current;
+        List<GameObject>  openSet = new List<GameObject>();
         float tentative_cost = 0f;
-        float[] gCost = new float[n_nodes];
-        Dictionary<GameObject, float> fScore = new Dictionary<GameObject, float>();
+        GameObject current;
         Dictionary<GameObject, GameObject> cameFrom = new Dictionary<GameObject, GameObject>();
 
+        openSet.Add(start);
         foreach (var node in nodes){
             fScore[node] = float.MaxValue;
         }
@@ -89,15 +96,11 @@ public class NavMeshScript : MonoBehaviour {
         while (openSet.Count > 0)
         {
             current = openSet[0];
-            if (current == end)
+            if (heuristic(current) < pathThreshold)
             {
                 // First path found, probably the best or a close one
                 path = get_path(cameFrom, current);
-                // Print the path
-                foreach (var item in path)
-                {
-                    print(item.name + ", ");
-                }
+                endNode = current;
             }
 
             openSet.Remove(current);
@@ -156,6 +159,20 @@ public class NavMeshScript : MonoBehaviour {
             path.AddFirst(current);
         }
         return path;
+    }
+
+    public void removeFirstInPath()
+    {
+        if (path.Count > 0)
+        {
+            path.First.Value.GetComponent<NodeScript>().active = true;
+            path.RemoveFirst();
+        }
+
+        if(path.Count > 0)
+        {
+            startNode = path.First.Value;
+        }
     }
 
 }
