@@ -29,39 +29,27 @@ public class ShotScript : MonoBehaviour
     private Rigidbody rigidbodyComponent;
 
     // Use this for initialization
-    void Start()
-    {
-
+    void Start(){
         initx = transform.localScale.x;
         inity = transform.localScale.y;
         initz = transform.localScale.z;
+        // objects to ignore on trigger
         lista.Add("Background");
         lista.Add("Foreground");
         lista.Add("Enemies");
         lista.Add("shots");
-        //lista.Add("Fence");
+
         // 2 - Limited time to live to avoid any leak
-        Destroy(gameObject, 5); // 20 sec
-
-        //gravity = new Vector3(0, 0, Physics.gravity.y);
-
+        Destroy(gameObject, 5); // 5 sec
         rigidbodyComponent = GetComponent<Rigidbody>();
     }
 
     private void OnTriggerEnter(Collider other) {
         GameObject choque = other.transform.gameObject;
-    
+        // if not in list, we can destroy the shot
         if (!lista.Contains(choque.transform.tag)){
             Destroy(transform.gameObject, 0);
         }
-    }
-
-    private void OnCollisionEnter(Collision collision){
-        //GameObject choque = collision.transform.gameObject;
-
-        //if (!lista.Contains(choque.transform.tag)){
-        //  Destroy(transform.gameObject, 0);
-        // }
     }
 
     // Update is called once per frame
@@ -76,15 +64,14 @@ public class ShotScript : MonoBehaviour
 
     private void FixedUpdate()
     {
-        //Physics.gravity = gravity;
         // Apply movement to the rigidbody
         rigidbodyComponent.velocity = movement;
 
-       rigidbodyComponent.transform.localScale = new Vector3(
+        // reduce shot size by time
+        rigidbodyComponent.transform.localScale = new Vector3(
            initx * 3 * Mathf.Abs(rigidbodyComponent.transform.position.z),
            inity * 3 * Mathf.Abs(rigidbodyComponent.transform.position.z),
            initz);
 
     }
 }
-
