@@ -8,7 +8,7 @@ public class NodeScript : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		// Se le debe asignar una posicion especial para el eje z
+		// Special position for z axis
         transform.position = new Vector3(transform.position.x, transform.position.y, -0.5490916f);
     }
 

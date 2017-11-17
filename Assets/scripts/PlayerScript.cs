@@ -23,7 +23,7 @@ public class PlayerScript : MonoBehaviour {
     }
 
     void Update(){
-        // modifi vector values by input in kew arrows
+        // modify vector values by input in kew arrows
         var move = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0);
         // turn 'face' of player in mouse location
         var v3 = Input.mousePosition;
@@ -34,8 +34,7 @@ public class PlayerScript : MonoBehaviour {
         // move player in 'move' direction in given speed
         transform.position += move * speed * Time.deltaTime;
 
-        // Formula para facing
-        // Orientar hacia el target
+        // Turn face to target
         Vector3 facing = target - transform.position;
         float angulo = Mathf.Atan2(-facing.x, facing.y) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.AngleAxis(angulo, Vector3.forward);
@@ -48,7 +47,7 @@ public class PlayerScript : MonoBehaviour {
         // jump conditions
         if (Input.GetKeyDown(KeyCode.Space) && !jumping){
             jumping = true;
-            //go down
+            // if junping --> go down
             rb.velocity += jumpSpeed * -new Vector3(0, 0, 1);
         }else if (transform.position.z > -0.6){
             jumping = false;
