@@ -98,16 +98,20 @@ public class EnemyScript : MonoBehaviour
         // call to behavior choose
         switch (switcher){
             case 9:
+                //"Follow Path"
                 pathFollowing();
                 break;
             case 8:
+                //"Pursue"
                 pursue(direction);
                 break;
             case 7:
+                //"Imitar"
                 align();
                 alignVeloc();
                 break;
             case 6:
+                //"Busqueda dinámica"
                 faceTo(direction);
                 dynamicSeek();
                 break;
@@ -116,16 +120,20 @@ public class EnemyScript : MonoBehaviour
                 simpleMove(move);
                 break;
             case 4:
+                //"Merodear"
                 wander();
                 break;
             case 3:
+                //"Buscar y encarar"
                 kinematicSeek(direction);
                 faceTo(direction);
                 break;
             case 2:
+                //"Encarar"
                 faceTo(direction);
                 break;
             case 1:
+                //"Alinear"
                 align();
                 break;
             default:
@@ -134,16 +142,17 @@ public class EnemyScript : MonoBehaviour
     }
 
     // Wander movement
-    private void wander()
-    {
+    private void wander(){
         velocity = 2;
         if (canTurn > 0.0f){
+            // waiting some time so can turn
             canTurn -= Time.deltaTime;
-        } else{
-            // cambiar dirección
+        } else {
+            // time passed, now can turn
             angle = Mathf.Deg2Rad * Random.Range(-maxAngle, maxAngle);
             canTurn = 2.0f;
         }
+        // turn if its needed, and move
         faceTo(new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0) * Time.deltaTime);
         transform.position += transform.up * velocity * Time.deltaTime;
     }
@@ -157,11 +166,13 @@ public class EnemyScript : MonoBehaviour
 
     // Dynamic seek movement
     private void dynamicSeek(){
+        // go to target
         transform.position += transform.up * velocity * Time.deltaTime;
     }
 
     // Dynamic flee movement
     private void dynamicFlee(){
+        // run away from target
         transform.position += -transform.up * velocity * Time.deltaTime;
     }
 
@@ -176,6 +187,7 @@ public class EnemyScript : MonoBehaviour
     private void faceTo(Vector3 direction){
         float angle = Mathf.Atan2(-direction.x, direction.y) * Mathf.Rad2Deg;
         Quaternion q = Quaternion.AngleAxis(angle, Vector3.forward);
+        // turn face to target direction
         transform.rotation = Quaternion.Slerp(transform.rotation, q, Time.deltaTime * angSpeed);
     }
 
@@ -186,6 +198,7 @@ public class EnemyScript : MonoBehaviour
 
     // Control velocity for character
     private void controlVelocity(Vector3 faceToDir){
+        // compare with defined ranges to know if character should break or stop
         if (faceToDir.magnitude > breaking){
             faceToDir.Normalize();
             velocity += 1 * Time.deltaTime;
@@ -209,6 +222,7 @@ public class EnemyScript : MonoBehaviour
 
     // faceTo align to target
     private void align(){
+        // facing in 'target's face' direction
         transform.rotation = Quaternion.Slerp(
             transform.rotation,
             player.transform.rotation,
@@ -218,6 +232,7 @@ public class EnemyScript : MonoBehaviour
 
     // Velocity align to target
     private void alignVeloc(){
+        // character does all movements target does
         transform.position += playerS.velocity * Time.deltaTime;
     }
 
@@ -243,6 +258,7 @@ public class EnemyScript : MonoBehaviour
         dynamicSeek();
     }
 
+    // character follow the path to its target
     public void pathFollowing(){
         if (path.Count > 0){
             target = path[0].transform.position;
@@ -260,6 +276,7 @@ public class EnemyScript : MonoBehaviour
         }
     }
 
+    // avoid collition with other characters
     private void separation(){
         float strength = 0f;
         float distance = 0f;
@@ -279,6 +296,7 @@ public class EnemyScript : MonoBehaviour
         }
     }
 
+    // avoid to collide with target
     private void separateFromTarget(Vector3 target){
         float strength = 0f;
         Vector3 direction = target - transform.position;

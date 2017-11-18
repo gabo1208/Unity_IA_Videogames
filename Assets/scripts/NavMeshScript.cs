@@ -75,17 +75,21 @@ public class NavMeshScript : MonoBehaviour {
         GameObject current;
         Dictionary<GameObject, GameObject> cameFrom = new Dictionary<GameObject, GameObject>();
 
+        // we put startNode at the open set
         openSet.Add(start);
         foreach (var node in nodes){
             fScore[node] = float.MaxValue;
         }
+        // inicialize startNode value with heuristic
         fScore[startNode] = heuristic(startNode);
 
         for (int i = 0; i < gCost.Length; i++){
             gCost[i] = float.MaxValue;
         }
+        // inicialize startNode with 0
         gCost[int.Parse(start.name.Remove(0, 4))] = 0;
 
+        // if open set has values we keep working
         while (openSet.Count > 0){
             current = openSet[0];
             if (heuristic(current) < pathThreshold){
@@ -93,15 +97,17 @@ public class NavMeshScript : MonoBehaviour {
                 path = get_path(cameFrom, current);
                 endNode = current;
             }
-
+            // remove the node from the openset and add it to the closed set
             openSet.Remove(current);
             closedSet.Add(current);
 
             foreach (var neighbor in current.GetComponent<NodeScript>().conections){
+                // ignore node if it is already a closed one
                 if (closedSet.Contains(neighbor)){
                     continue;
                 }
 
+                // open node if its not
                 if(!openSet.Contains(neighbor)){
                     openSet.Add(neighbor);
                 }
@@ -109,14 +115,17 @@ public class NavMeshScript : MonoBehaviour {
                 tentative_cost = gCost[int.Parse(current.name.Remove(0, 4))] + 
                     (current.transform.position - neighbor.transform.position).magnitude;
 
+                // ignore node if its tentative cost is greater than the cost of the neighbor 
                 if (tentative_cost >= gCost[int.Parse(neighbor.name.Remove(0, 4))]){
                     continue;
                 }
-
+                // value to neighbor in dictionary, the current
                 cameFrom[neighbor] = current;
+                // calculate costs to neighbor
                 gCost[int.Parse(neighbor.name.Remove(0, 4))] = tentative_cost;
                 fScore[neighbor] = gCost[int.Parse(current.name.Remove(0, 4))] + heuristic(neighbor);
             }
+            // sort based in heuristic
             openSet = nodesToSort(openSet, fScore);
         }
     }
