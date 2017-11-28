@@ -28,9 +28,26 @@ public class EnemyScript : MonoBehaviour
     private GameObject[] closers;
     private Vector3 direction, target;
     private NavMeshScript navmeshScript;
+    // position initial
+    private Vector3 posinit;
+    private Vector3 posToPatrol;
+    // State Machine variables
+    enum state {
+        patrol,
+        resting,
+        follow,
+        smell,
+    };
+
+    state myState;
+
+    private float patrolingTime = 15f;
+    private float restingTime = 1.5f;
+    private float tiredCd;
 
     private void Start()
     {
+
         initx = transform.localScale.x;
         inity = transform.localScale.y;
         // we need to know where player is
@@ -43,102 +60,114 @@ public class EnemyScript : MonoBehaviour
         weapon.enabled = false;
         // render triangle
         navmeshScript = GetComponent<NavMeshScript>();
+
+        posinit = transform.position;
+        posToPatrol = new Vector3(posinit.x, posinit.y + 5, posinit.z );
+        myState = state.patrol;
+        tiredCd = patrolingTime;
     }
 
     private void Update()
     {
-        // if not path following, choose behaviors
-        if (switcher != 9){
-            target = player.transform.position;
-            direction = target - transform.position;
+
+        if (tiredCd > 0){
+            tiredCd -= Time.deltaTime;
         }
 
-        // behaviors by key input
-        if (Input.GetKey(KeyCode.LeftControl)){
-            if (Input.GetKey(KeyCode.Q)){
-                switcher = 2;
-                //"Encarar";
-            } else if (Input.GetKey(KeyCode.W)){
-                switcher = 3;
-                //"Buscar y encarar";
-            } else if (Input.GetKey(KeyCode.E)){
-                switcher = 4;
-                //"Merodear";
-            } else if (Input.GetKey(KeyCode.A)){
-                switcher = 1;
-                //"Alinear";
-            } else if (Input.GetKeyDown(KeyCode.T)){
-                weapon.enabled = !weapon.enabled;
-            } else if (Input.GetKey(KeyCode.D)){
-                switcher = 0;
-                //"Estacionario";
-            } else if (Input.GetKey(KeyCode.Z)){
-                switcher = 6;
-                //"Busqueda dinámica";
-            } else if (Input.GetKey(KeyCode.X)){
-                switcher = 7;
-                //"Imitar";
-            } else if (Input.GetKey(KeyCode.C)){
-                switcher = 8;
-                //"Pursue";
-            } else if (Input.GetKey(KeyCode.G)){
-                switcher = 9;
-                //"Follow Path";
-            }
-        }
-        // weapon activated, shoot
-        if (weapon.enabled){
-            shoot();
-        }
+        statesMachine();
 
-        separation();
-        controlVelocity(direction);
-        //collitionRays(direction);
+        //// if not path following, choose behaviors
+        //if (switcher != 9){
+        //    target = player.transform.position;
+        //    direction = target - transform.position;
+        //}
 
-        // call to behavior choose
-        switch (switcher){
-            case 9:
-                //"Follow Path"
-                pathFollowing();
-                break;
-            case 8:
-                //"Pursue"
-                pursue(direction);
-                break;
-            case 7:
-                //"Imitar"
-                align();
-                alignVeloc();
-                break;
-            case 6:
-                //"Busqueda dinámica"
-                faceTo(direction);
-                dynamicSeek();
-                break;
-            case 5:
-                var move = new Vector3(1.0f, 1.0f, 0);
-                simpleMove(move);
-                break;
-            case 4:
-                //"Merodear"
-                wander();
-                break;
-            case 3:
-                //"Buscar y encarar"
-                kinematicSeek(direction);
-                faceTo(direction);
-                break;
-            case 2:
-                //"Encarar"
-                faceTo(direction);
-                break;
-            case 1:
-                //"Alinear"
-                align();
-                break;
-            default:
-                break;
-        }
+        //// behaviors by key input
+        //if (input.getkey(keycode.leftcontrol)){
+        //    if (input.getkey(keycode.q)){
+        //        switcher = 2;
+        //        //"encarar";
+        //    } else if (input.getkey(keycode.w)){
+        //        switcher = 3;
+        //        //"buscar y encarar";
+        //    } else if (input.getkey(keycode.e)){
+        //        switcher = 4;
+        //        //"merodear";
+        //    } else if (input.getkey(keycode.a)){
+        //        switcher = 1;
+        //        //"alinear";
+        //    } else if (input.getkeydown(keycode.t)){
+        //        weapon.enabled = !weapon.enabled;
+        //    } else if (input.getkey(keycode.d)){
+        //        switcher = 0;
+        //        //"estacionario";
+        //    } else if (input.getkey(keycode.z)){
+        //        switcher = 6;
+        //        //"busqueda dinámica";
+        //    } else if (input.getkey(keycode.x)){
+        //        switcher = 7;
+        //        //"imitar";
+        //    } else if (input.getkey(keycode.c)){
+        //        switcher = 8;
+        //        //"pursue";
+        //    } else if (input.getkey(keycode.g)){
+        //        switcher = 9;
+        //        //"follow path";
+        //    }
+        //}
+        //// weapon activated, shoot
+        //if (weapon.enabled){
+        //    shoot();
+        //}
+
+        //separation();
+        //controlvelocity(direction);
+        ////collitionrays(direction);
+
+        //// call to behavior choose
+        //switch (switcher){
+        //    case 9:
+        //        //"follow path"
+        //        pathfollowing();
+        //        break;
+        //    case 8:
+        //        //"pursue"
+        //        pursue(direction);
+        //        break;
+        //    case 7:
+        //        //"imitar"
+        //        align();
+        //        alignveloc();
+        //        break;
+        //    case 6:
+        //        //"busqueda dinámica"
+        //        faceto(direction);
+        //        dynamicseek();
+        //        break;
+        //    case 5:
+        //        var move = new vector3(1.0f, 1.0f, 0);
+        //        simplemove(move);
+        //        break;
+        //    case 4:
+        //        //"merodear"
+        //        wander();
+        //        break;
+        //    case 3:
+        //        //"buscar y encarar"
+        //        kinematicseek(direction);
+        //        faceto(direction);
+        //        break;
+        //    case 2:
+        //        //"encarar"
+        //        faceto(direction);
+        //        break;
+        //    case 1:
+        //        //"alinear"
+        //        align();
+        //        break;
+        //    default:
+        //        break;
+        //}
     }
 
     // Wander movement
@@ -276,6 +305,28 @@ public class EnemyScript : MonoBehaviour
         }
     }
 
+    private void patroling()
+    {
+        if (path.Count > 0)
+        {
+            Vector3 case1 = transform.position - posinit;
+            Vector3 case2 = transform.position - posToPatrol;
+
+            if (-0.75f <= case1.magnitude && case1.magnitude <= 0.75f){
+                target = posToPatrol;
+            } else if (-0.75f <= case2.magnitude && case2.magnitude <= 0.75f){
+                target = posinit;
+            }
+
+            direction = target - transform.position;
+            if (direction.magnitude > pathThreshold)
+            {
+                faceTo(direction);
+                dynamicSeek();
+            }
+        }
+    }
+
     // avoid collition with other characters
     private void separation(){
         float strength = 0f;
@@ -365,5 +416,58 @@ public class EnemyScript : MonoBehaviour
         } else {
             Debug.DrawRay(transform.position, transform.up * 2.5f, Color.green);
         }
+    }
+
+    private void statesMachine(){
+        if (myState == state.patrol){
+            if (tiredSwitch) {
+                myState = state.resting;
+                tiredCd = restingTime;
+            }
+            if (canSeePlayer()){
+                myState = state.follow;
+            }
+            patroling();
+        } else if (myState == state.resting){
+            if (tiredSwitch){
+                myState = state.patrol;
+                tiredCd = patrolingTime;
+            }
+
+            if (canSeePlayer()){
+                myState = state.follow;
+            }
+        } else if (myState == state.follow){
+            if (!canSeePlayer()){
+                myState = state.patrol;
+                tiredCd = patrolingTime;
+            }
+            pathFollowing();
+        } else if (myState == state.smell){
+            if (canSeePlayer()){
+                myState = state.follow;
+            }
+
+        }
+    }
+
+    private bool tiredSwitch{
+        get
+        {
+            return tiredCd <= 0f;
+        }
+    }
+
+    private bool canSeePlayer(){
+        Vector3 plPos = player.transform.position;
+        int lm = 1 << LayerMask.NameToLayer("Objects");
+        RaycastHit notSee;
+
+        if (Physics.Raycast(transform.position, plPos, out notSee, 2.5f, lm)){
+            return false;
+        }
+
+        return false;
+
     }
 }
