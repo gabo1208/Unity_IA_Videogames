@@ -4,10 +4,6 @@ using System.Collections.Generic;
 
 public class EnemyScript : MonoBehaviour
 {
-    public float initx;
-    public float inity;
-    public float angSpeed = 5f;
-    public float velocity = 1.0f;
     public float minSpeed = 1.0f;
     public float maxSpeed = 4.0f;
     public float stop = 1f;
@@ -29,6 +25,15 @@ public class EnemyScript : MonoBehaviour
     private Vector3 direction, target;
     private NavMeshScript navmeshScript;
 
+    // State machine variables
+    public float initx;
+    public float inity;
+    public float angSpeed = 5f;
+    public float velocity = 1.0f;
+    public bool targetSpotted = false;
+    public bool smellDetected = false;
+    public bool targetScaped = true;
+
     private void Start()
     {
         initx = transform.localScale.x;
@@ -47,7 +52,7 @@ public class EnemyScript : MonoBehaviour
 
     private void Update()
     {
-        // if not path following, choose behaviors
+        /* if not path following, choose behaviors
         if (switcher != 9){
             target = player.transform.position;
             direction = target - transform.position;
@@ -85,7 +90,7 @@ public class EnemyScript : MonoBehaviour
                 switcher = 9;
                 //"Follow Path";
             }
-        }
+        }*/
         // weapon activated, shoot
         if (weapon.enabled){
             shoot();
@@ -101,7 +106,7 @@ public class EnemyScript : MonoBehaviour
                 //"Follow Path"
                 pathFollowing();
                 break;
-            case 8:
+            /*case 8:
                 //"Pursue"
                 pursue(direction);
                 break;
@@ -135,7 +140,7 @@ public class EnemyScript : MonoBehaviour
             case 1:
                 //"Alinear"
                 align();
-                break;
+                break;*/
             default:
                 break;
         }

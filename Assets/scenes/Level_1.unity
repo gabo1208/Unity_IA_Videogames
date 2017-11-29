@@ -159,6 +159,8 @@ MonoBehaviour:
   - {fileID: 253762816}
   - {fileID: 621950607}
   active: 1
+  smellLevel: 0
+  smellType: 
 --- !u!23 &6359778
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -259,6 +261,8 @@ MonoBehaviour:
   - {fileID: 1003755804}
   - {fileID: 1874137417}
   active: 1
+  smellLevel: 0
+  smellType: 
 --- !u!23 &12066087
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -359,6 +363,8 @@ MonoBehaviour:
   - {fileID: 1497222917}
   - {fileID: 507882205}
   active: 1
+  smellLevel: 0
+  smellType: 
 --- !u!23 &39868090
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -647,6 +653,8 @@ MonoBehaviour:
   - {fileID: 1086997906}
   - {fileID: 111384171}
   active: 1
+  smellLevel: 0
+  smellType: 
 --- !u!23 &59089606
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -750,6 +758,8 @@ MonoBehaviour:
   - {fileID: 1003755804}
   - {fileID: 12066084}
   active: 1
+  smellLevel: 0
+  smellType: 
 --- !u!23 &69270817
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -864,6 +874,8 @@ MonoBehaviour:
   - {fileID: 866956705}
   - {fileID: 1989177016}
   active: 1
+  smellLevel: 0
+  smellType: 
 --- !u!23 &71120988
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -995,6 +1007,8 @@ MonoBehaviour:
   - {fileID: 1293051540}
   - {fileID: 59089604}
   active: 1
+  smellLevel: 0
+  smellType: 
 --- !u!23 &111384174
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1123,10 +1137,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b7e5856fc65c764091ce395f6ac1b0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initx: 0
-  inity: 0
-  angSpeed: 5
-  velocity: 1
   minSpeed: 1
   maxSpeed: 4
   stop: 0.5
@@ -1138,6 +1148,13 @@ MonoBehaviour:
   collitionThreshold: 1.5
   switcher: 0
   path: []
+  initx: 0
+  inity: 0
+  angSpeed: 5
+  velocity: 1
+  targetSpotted: 0
+  smellDetected: 0
+  targetScaped: 1
 --- !u!65 &117898649
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1366,6 +1383,8 @@ MonoBehaviour:
   - {fileID: 111384171}
   - {fileID: 671686775}
   active: 1
+  smellLevel: 0
+  smellType: 
 --- !u!23 &238744790
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1479,6 +1498,8 @@ MonoBehaviour:
   - {fileID: 507882205}
   - {fileID: 1342072418}
   active: 1
+  smellLevel: 0
+  smellType: 
 --- !u!23 &244102531
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1579,6 +1600,8 @@ MonoBehaviour:
   - {fileID: 621950607}
   - {fileID: 951898479}
   active: 1
+  smellLevel: 0
+  smellType: 
 --- !u!23 &253762819
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1820,6 +1843,8 @@ MonoBehaviour:
   - {fileID: 467913839}
   - {fileID: 479972791}
   active: 1
+  smellLevel: 0
+  smellType: 
 --- !u!23 &333191996
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1926,6 +1951,8 @@ MonoBehaviour:
   - {fileID: 69270815}
   - {fileID: 1491304095}
   active: 1
+  smellLevel: 0
+  smellType: 
 --- !u!23 &349681593
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2013,6 +2040,8 @@ MonoBehaviour:
   - {fileID: 797687643}
   - {fileID: 903019719}
   active: 1
+  smellLevel: 0
+  smellType: 
 --- !u!23 &353361556
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2200,6 +2229,8 @@ MonoBehaviour:
   - {fileID: 59089604}
   - {fileID: 238744788}
   active: 1
+  smellLevel: 0
+  smellType: 
 --- !u!23 &412490449
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2300,6 +2331,8 @@ MonoBehaviour:
   - {fileID: 333191993}
   - {fileID: 479972791}
   active: 1
+  smellLevel: 0
+  smellType: 
 --- !u!23 &467913842
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2401,6 +2434,8 @@ MonoBehaviour:
   - {fileID: 671686775}
   - {fileID: 412490446}
   active: 1
+  smellLevel: 0
+  smellType: 
 --- !u!23 &479972794
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2500,6 +2535,8 @@ MonoBehaviour:
   - {fileID: 1497222917}
   - {fileID: 244102528}
   active: 1
+  smellLevel: 0
+  smellType: 
 --- !u!23 &507882208
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2605,6 +2642,8 @@ MonoBehaviour:
   - {fileID: 253762816}
   - {fileID: 412490446}
   active: 1
+  smellLevel: 0
+  smellType: 
 --- !u!23 &621950610
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2707,6 +2746,8 @@ MonoBehaviour:
   - {fileID: 412490446}
   - {fileID: 238744788}
   active: 1
+  smellLevel: 0
+  smellType: 
 --- !u!23 &671686778
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2808,6 +2849,8 @@ MonoBehaviour:
   - {fileID: 71120985}
   - {fileID: 866956705}
   active: 1
+  smellLevel: 0
+  smellType: 
 --- !u!23 &679083695
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -3144,6 +3187,8 @@ MonoBehaviour:
   - {fileID: 1991316802}
   - {fileID: 1469076806}
   active: 1
+  smellLevel: 0
+  smellType: 
 --- !u!23 &786082509
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -3244,6 +3289,8 @@ MonoBehaviour:
   - {fileID: 1186211250}
   - {fileID: 353361554}
   active: 1
+  smellLevel: 0
+  smellType: 
 --- !u!23 &797687645
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -3356,6 +3403,8 @@ MonoBehaviour:
   - {fileID: 1691918068}
   - {fileID: 927711194}
   active: 1
+  smellLevel: 0
+  smellType: 
 --- !u!23 &825743348
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -3584,6 +3633,8 @@ MonoBehaviour:
   - {fileID: 1271529618}
   - {fileID: 71120985}
   active: 1
+  smellLevel: 0
+  smellType: 
 --- !u!23 &866956708
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -3691,7 +3742,7 @@ Prefab:
     - target: {fileID: 114118882840800522, guid: fd06d864a78bd9a4980a748dd6c36703,
         type: 2}
       propertyPath: pathColor.r
-      value: 0.24137926
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114118882840800522, guid: fd06d864a78bd9a4980a748dd6c36703,
         type: 2}
@@ -3701,7 +3752,7 @@ Prefab:
     - target: {fileID: 114118882840800522, guid: fd06d864a78bd9a4980a748dd6c36703,
         type: 2}
       propertyPath: pathColor.b
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114118882840800522, guid: fd06d864a78bd9a4980a748dd6c36703,
         type: 2}
@@ -3759,6 +3810,8 @@ MonoBehaviour:
   - {fileID: 1163161631}
   - {fileID: 353361554}
   active: 1
+  smellLevel: 0
+  smellType: 
 --- !u!23 &903019721
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -3859,6 +3912,8 @@ MonoBehaviour:
   - {fileID: 2007121600}
   - {fileID: 1186211250}
   active: 1
+  smellLevel: 0
+  smellType: 
 --- !u!23 &927711196
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -3974,6 +4029,8 @@ MonoBehaviour:
   - {fileID: 1989177016}
   - {fileID: 1322204464}
   active: 1
+  smellLevel: 0
+  smellType: 
 --- !u!23 &951898482
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -4074,6 +4131,8 @@ MonoBehaviour:
   - {fileID: 1702180457}
   - {fileID: 12066084}
   active: 1
+  smellLevel: 0
+  smellType: 
 --- !u!23 &1003755807
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -4212,6 +4271,8 @@ MonoBehaviour:
   - {fileID: 349681590}
   - {fileID: 1293051540}
   active: 1
+  smellLevel: 0
+  smellType: 
 --- !u!23 &1086997908
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -4407,6 +4468,8 @@ MonoBehaviour:
   - {fileID: 353361554}
   - {fileID: 903019719}
   active: 1
+  smellLevel: 0
+  smellType: 
 --- !u!23 &1163161634
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -4495,6 +4558,8 @@ MonoBehaviour:
   - {fileID: 2007121600}
   - {fileID: 1163161631}
   active: 1
+  smellLevel: 0
+  smellType: 
 --- !u!23 &1186211252
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -4677,6 +4742,8 @@ MonoBehaviour:
   - {fileID: 1702180457}
   - {fileID: 1003755804}
   active: 1
+  smellLevel: 0
+  smellType: 
 --- !u!23 &1209530397
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -4791,6 +4858,8 @@ MonoBehaviour:
   - {fileID: 786082507}
   - {fileID: 1186211250}
   active: 1
+  smellLevel: 0
+  smellType: 
 --- !u!23 &1245749379
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -4967,6 +5036,8 @@ MonoBehaviour:
   - {fileID: 679083692}
   - {fileID: 1989177016}
   active: 1
+  smellLevel: 0
+  smellType: 
 --- !u!23 &1271529621
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -5067,6 +5138,8 @@ MonoBehaviour:
   - {fileID: 1086997906}
   - {fileID: 1491304095}
   active: 1
+  smellLevel: 0
+  smellType: 
 --- !u!23 &1293051543
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -5244,6 +5317,8 @@ MonoBehaviour:
   - {fileID: 253762816}
   - {fileID: 1989177016}
   active: 1
+  smellLevel: 0
+  smellType: 
 --- !u!23 &1322204467
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -5330,6 +5405,8 @@ MonoBehaviour:
   - {fileID: 1691918068}
   - {fileID: 825743345}
   active: 1
+  smellLevel: 0
+  smellType: 
 --- !u!23 &1342072420
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -5445,6 +5522,8 @@ MonoBehaviour:
   - {fileID: 1874137417}
   - {fileID: 1469076806}
   active: 1
+  smellLevel: 0
+  smellType: 
 --- !u!23 &1348702683
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -5651,6 +5730,16 @@ Prefab:
       propertyPath: breaking
       value: 1.5
       objectReference: {fileID: 0}
+    - target: {fileID: 114118882840800522, guid: fd06d864a78bd9a4980a748dd6c36703,
+        type: 2}
+      propertyPath: pathColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114118882840800522, guid: fd06d864a78bd9a4980a748dd6c36703,
+        type: 2}
+      propertyPath: pathColor.g
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: fd06d864a78bd9a4980a748dd6c36703, type: 2}
   m_IsPrefabParent: 0
@@ -5721,6 +5810,8 @@ MonoBehaviour:
   - {fileID: 1991316802}
   - {fileID: 786082507}
   active: 1
+  smellLevel: 0
+  smellType: 
 --- !u!23 &1469076808
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -5853,6 +5944,8 @@ MonoBehaviour:
   - {fileID: 1348702680}
   - {fileID: 1293051540}
   active: 1
+  smellLevel: 0
+  smellType: 
 --- !u!23 &1491304097
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -5967,6 +6060,8 @@ MonoBehaviour:
   - {fileID: 507882205}
   - {fileID: 244102528}
   active: 1
+  smellLevel: 0
+  smellType: 
 --- !u!23 &1497222920
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -6138,6 +6233,8 @@ MonoBehaviour:
   - {fileID: 39868087}
   - {fileID: 1497222917}
   active: 1
+  smellLevel: 0
+  smellType: 
 --- !u!23 &1519095655
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -6269,6 +6366,8 @@ MonoBehaviour:
   - {fileID: 1209530395}
   - {fileID: 1702180457}
   active: 1
+  smellLevel: 0
+  smellType: 
 --- !u!23 &1590473598
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -6432,6 +6531,8 @@ MonoBehaviour:
   - {fileID: 45403543}
   - {fileID: 71120985}
   active: 1
+  smellLevel: 0
+  smellType: 
 --- !u!1 &1642080225
 GameObject:
   m_ObjectHideFlags: 0
@@ -6562,6 +6663,8 @@ MonoBehaviour:
   - {fileID: 825743345}
   - {fileID: 786082507}
   active: 1
+  smellLevel: 0
+  smellType: 
 --- !u!23 &1691918071
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -6649,6 +6752,8 @@ MonoBehaviour:
   - {fileID: 1209530395}
   - {fileID: 69270815}
   active: 1
+  smellLevel: 0
+  smellType: 
 --- !u!23 &1702180459
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -6763,6 +6868,8 @@ MonoBehaviour:
   - {fileID: 1497222917}
   - {fileID: 244102528}
   active: 1
+  smellLevel: 0
+  smellType: 
 --- !u!23 &1772864465
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -7154,6 +7261,8 @@ MonoBehaviour:
   - {fileID: 1519095652}
   - {fileID: 1772864462}
   active: 1
+  smellLevel: 0
+  smellType: 
 --- !u!23 &1874137419
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -7256,6 +7365,8 @@ MonoBehaviour:
   - {fileID: 1469076806}
   - {fileID: 786082507}
   active: 1
+  smellLevel: 0
+  smellType: 
 --- !u!23 &1877384195
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -7488,6 +7599,8 @@ MonoBehaviour:
   - {fileID: 287644539}
   - {fileID: 45403543}
   active: 1
+  smellLevel: 0
+  smellType: 
 --- !u!1 &1953406074
 GameObject:
   m_ObjectHideFlags: 0
@@ -7665,6 +7778,8 @@ MonoBehaviour:
   - {fileID: 679083692}
   - {fileID: 71120985}
   active: 1
+  smellLevel: 0
+  smellType: 
 --- !u!23 &1989177019
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -7764,6 +7879,8 @@ MonoBehaviour:
   - {fileID: 1469076806}
   - {fileID: 786082507}
   active: 1
+  smellLevel: 0
+  smellType: 
 --- !u!23 &1991316805
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -7852,6 +7969,8 @@ MonoBehaviour:
   - {fileID: 1163161631}
   - {fileID: 353361554}
   active: 1
+  smellLevel: 0
+  smellType: 
 --- !u!23 &2007121602
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -7968,6 +8087,8 @@ MonoBehaviour:
   - {fileID: 6359775}
   - {fileID: 333191993}
   active: 1
+  smellLevel: 0
+  smellType: 
 --- !u!23 &2055753215
 MeshRenderer:
   m_ObjectHideFlags: 0

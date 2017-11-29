@@ -9,6 +9,7 @@ public class PlayerScript : MonoBehaviour {
     public bool jumping = false;
     private Vector3 gravity;
     public Rigidbody rb;
+    public bool visible = true;
 
     // Use this for initialization
     void Start () {

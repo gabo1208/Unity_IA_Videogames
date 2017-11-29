@@ -5,6 +5,8 @@ using UnityEngine;
 public class NodeScript : MonoBehaviour {
     public GameObject[] conections;
     public bool active = true;
+    public int smellLevel = 0;
+    public string smellType = "";
 
 	// Use this for initialization
 	void Start () {
