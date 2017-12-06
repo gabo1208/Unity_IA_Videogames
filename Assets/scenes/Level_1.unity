@@ -108,6 +108,51 @@ NavMeshSettings:
     tileSize: 256
     accuratePlacement: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &6141595
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 6141596}
+  - component: {fileID: 6141597}
+  m_Layer: 8
+  m_Name: Obstacle3 (2)
+  m_TagString: Obstacle
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6141596
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 6141595}
+  m_LocalRotation: {x: -0, y: -0, z: 0.7071068, w: 0.7071068}
+  m_LocalPosition: {x: 0.02, y: 9.18, z: 0}
+  m_LocalScale: {x: 0.2624999, y: 21.336348, z: 1}
+  m_Children:
+  - {fileID: 1914452989}
+  m_Father: {fileID: 716518738}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
+--- !u!54 &6141597
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 6141595}
+  serializedVersion: 2
+  m_Mass: 999
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 118
+  m_CollisionDetection: 0
 --- !u!1 &6359775
 GameObject:
   m_ObjectHideFlags: 0
@@ -120,10 +165,10 @@ GameObject:
   - component: {fileID: 6359779}
   - component: {fileID: 6359778}
   - component: {fileID: 6359777}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: Node16
   m_TagString: Node
-  m_Icon: {fileID: -2349822300998112484, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -161,13 +206,16 @@ MonoBehaviour:
   active: 1
   smellLevel: 0
   smellType: 
+  smellThreshold: 8
+  maxSmell: 10
+  player: {fileID: 0}
 --- !u!23 &6359778
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 6359775}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_MotionVectors: 1
@@ -224,10 +272,10 @@ GameObject:
   - component: {fileID: 12066088}
   - component: {fileID: 12066087}
   - component: {fileID: 12066086}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: Node33
   m_TagString: Node
-  m_Icon: {fileID: -2349822300998112484, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -263,13 +311,16 @@ MonoBehaviour:
   active: 1
   smellLevel: 0
   smellType: 
+  smellThreshold: 8
+  maxSmell: 10
+  player: {fileID: 0}
 --- !u!23 &12066087
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 12066084}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_MotionVectors: 1
@@ -326,10 +377,10 @@ GameObject:
   - component: {fileID: 39868091}
   - component: {fileID: 39868090}
   - component: {fileID: 39868089}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: Node38
   m_TagString: Node
-  m_Icon: {fileID: -2349822300998112484, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -365,13 +416,16 @@ MonoBehaviour:
   active: 1
   smellLevel: 0
   smellType: 
+  smellThreshold: 8
+  maxSmell: 10
+  player: {fileID: 0}
 --- !u!23 &39868090
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 39868087}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_MotionVectors: 1
@@ -515,6 +569,19 @@ Prefab:
       propertyPath: conections.Array.data[5]
       value: 
       objectReference: {fileID: 679083692}
+    - target: {fileID: 1390096237061400, guid: cbaca10fcc1682a458496e1cdc7c07c6, type: 2}
+      propertyPath: m_Layer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 23287900451454624, guid: cbaca10fcc1682a458496e1cdc7c07c6,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1390096237061400, guid: cbaca10fcc1682a458496e1cdc7c07c6, type: 2}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: cbaca10fcc1682a458496e1cdc7c07c6, type: 2}
   m_IsPrefabParent: 0
@@ -629,10 +696,10 @@ GameObject:
   - component: {fileID: 59089607}
   - component: {fileID: 59089606}
   - component: {fileID: 59089605}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: Node20
   m_TagString: Node
-  m_Icon: {fileID: -2349822300998112484, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -655,13 +722,16 @@ MonoBehaviour:
   active: 1
   smellLevel: 0
   smellType: 
+  smellThreshold: 8
+  maxSmell: 10
+  player: {fileID: 0}
 --- !u!23 &59089606
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 59089604}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_MotionVectors: 1
@@ -719,6 +789,51 @@ Transform:
   m_Father: {fileID: 1817574880}
   m_RootOrder: 20
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &67292066
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 67292067}
+  - component: {fileID: 67292068}
+  m_Layer: 8
+  m_Name: Obstacle2 (1)
+  m_TagString: Obstacle
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &67292067
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 67292066}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 11.06, y: 1.31, z: 0}
+  m_LocalScale: {x: 1, y: 16.205196, z: 1}
+  m_Children:
+  - {fileID: 1383363690}
+  m_Father: {fileID: 716518738}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!54 &67292068
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 67292066}
+  serializedVersion: 2
+  m_Mass: 999
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 118
+  m_CollisionDetection: 0
 --- !u!1 &69270815
 GameObject:
   m_ObjectHideFlags: 0
@@ -731,10 +846,10 @@ GameObject:
   - component: {fileID: 69270818}
   - component: {fileID: 69270817}
   - component: {fileID: 69270816}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: Node26
   m_TagString: Node
-  m_Icon: {fileID: -2349822300998112484, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -760,13 +875,16 @@ MonoBehaviour:
   active: 1
   smellLevel: 0
   smellType: 
+  smellThreshold: 8
+  maxSmell: 10
+  player: {fileID: 0}
 --- !u!23 &69270817
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 69270815}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_MotionVectors: 1
@@ -836,10 +954,10 @@ GameObject:
   - component: {fileID: 71120989}
   - component: {fileID: 71120988}
   - component: {fileID: 71120987}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: Node4
   m_TagString: Node
-  m_Icon: {fileID: -2349822300998112484, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -876,13 +994,16 @@ MonoBehaviour:
   active: 1
   smellLevel: 0
   smellType: 
+  smellThreshold: 8
+  maxSmell: 10
+  player: {fileID: 0}
 --- !u!23 &71120988
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 71120985}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_MotionVectors: 1
@@ -969,10 +1090,10 @@ GameObject:
   - component: {fileID: 111384175}
   - component: {fileID: 111384174}
   - component: {fileID: 111384173}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: Node23
   m_TagString: Node
-  m_Icon: {fileID: -2349822300998112484, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -1009,13 +1130,16 @@ MonoBehaviour:
   active: 1
   smellLevel: 0
   smellType: 
+  smellThreshold: 8
+  maxSmell: 10
+  player: {fileID: 0}
 --- !u!23 &111384174
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 111384171}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_MotionVectors: 1
@@ -1148,6 +1272,8 @@ MonoBehaviour:
   collitionThreshold: 1.5
   switcher: 0
   path: []
+  pathSmell: []
+  myState: 0
   initx: 0
   inity: 0
   angSpeed: 5
@@ -1212,7 +1338,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 117898644}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 93c1072062935434f941d5491014fd7b, type: 3}
   m_Name: 
@@ -1274,11 +1400,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4100953754537514, guid: 1a47cee9670f2a24286518e069620bf0, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 4.08
+      value: 5.96
       objectReference: {fileID: 0}
     - target: {fileID: 4100953754537514, guid: 1a47cee9670f2a24286518e069620bf0, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -3.42
+      value: 3.36
       objectReference: {fileID: 0}
     - target: {fileID: 4100953754537514, guid: 1a47cee9670f2a24286518e069620bf0, type: 2}
       propertyPath: m_LocalPosition.z
@@ -1346,6 +1472,51 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &205411332
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 205411333}
+  - component: {fileID: 205411334}
+  m_Layer: 8
+  m_Name: Obstacle3 (1)
+  m_TagString: Obstacle
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &205411333
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 205411332}
+  m_LocalRotation: {x: -0, y: -0, z: 0.7071068, w: 0.7071068}
+  m_LocalPosition: {x: 3.93, y: -7.37, z: 0}
+  m_LocalScale: {x: 1.0000005, y: 14.645274, z: 1}
+  m_Children:
+  - {fileID: 1015331872}
+  m_Father: {fileID: 716518738}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
+--- !u!54 &205411334
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 205411332}
+  serializedVersion: 2
+  m_Mass: 999
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 118
+  m_CollisionDetection: 0
 --- !u!1 &238744788
 GameObject:
   m_ObjectHideFlags: 0
@@ -1358,10 +1529,10 @@ GameObject:
   - component: {fileID: 238744791}
   - component: {fileID: 238744790}
   - component: {fileID: 238744789}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: Node21
   m_TagString: Node
-  m_Icon: {fileID: -2349822300998112484, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -1385,13 +1556,16 @@ MonoBehaviour:
   active: 1
   smellLevel: 0
   smellType: 
+  smellThreshold: 8
+  maxSmell: 10
+  player: {fileID: 0}
 --- !u!23 &238744790
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 238744788}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_MotionVectors: 1
@@ -1461,10 +1635,10 @@ GameObject:
   - component: {fileID: 244102532}
   - component: {fileID: 244102531}
   - component: {fileID: 244102530}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: Node41
   m_TagString: Node
-  m_Icon: {fileID: -2349822300998112484, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -1500,13 +1674,16 @@ MonoBehaviour:
   active: 1
   smellLevel: 0
   smellType: 
+  smellThreshold: 8
+  maxSmell: 10
+  player: {fileID: 0}
 --- !u!23 &244102531
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 244102528}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_MotionVectors: 1
@@ -1563,10 +1740,10 @@ GameObject:
   - component: {fileID: 253762820}
   - component: {fileID: 253762819}
   - component: {fileID: 253762818}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: Node17
   m_TagString: Node
-  m_Icon: {fileID: -2349822300998112484, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -1602,13 +1779,16 @@ MonoBehaviour:
   active: 1
   smellLevel: 0
   smellType: 
+  smellThreshold: 8
+  maxSmell: 10
+  player: {fileID: 0}
 --- !u!23 &253762819
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 253762816}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_MotionVectors: 1
@@ -1737,6 +1917,19 @@ Prefab:
       propertyPath: conections.Array.data[2]
       value: 
       objectReference: {fileID: 866956705}
+    - target: {fileID: 1390096237061400, guid: cbaca10fcc1682a458496e1cdc7c07c6, type: 2}
+      propertyPath: m_Layer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 23287900451454624, guid: cbaca10fcc1682a458496e1cdc7c07c6,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1390096237061400, guid: cbaca10fcc1682a458496e1cdc7c07c6, type: 2}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: cbaca10fcc1682a458496e1cdc7c07c6, type: 2}
   m_IsPrefabParent: 0
@@ -1807,10 +2000,10 @@ GameObject:
   - component: {fileID: 333191997}
   - component: {fileID: 333191996}
   - component: {fileID: 333191995}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: Node13
   m_TagString: Node
-  m_Icon: {fileID: -2349822300998112484, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -1845,13 +2038,16 @@ MonoBehaviour:
   active: 1
   smellLevel: 0
   smellType: 
+  smellThreshold: 8
+  maxSmell: 10
+  player: {fileID: 0}
 --- !u!23 &333191996
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 333191993}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_MotionVectors: 1
@@ -1913,10 +2109,10 @@ GameObject:
   - component: {fileID: 349681594}
   - component: {fileID: 349681593}
   - component: {fileID: 349681592}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: Node24
   m_TagString: Node
-  m_Icon: {fileID: -2349822300998112484, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -1953,13 +2149,16 @@ MonoBehaviour:
   active: 1
   smellLevel: 0
   smellType: 
+  smellThreshold: 8
+  maxSmell: 10
+  player: {fileID: 0}
 --- !u!23 &349681593
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 349681590}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_MotionVectors: 1
@@ -2016,10 +2215,10 @@ GameObject:
   - component: {fileID: 353361557}
   - component: {fileID: 353361556}
   - component: {fileID: 353361555}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: Node54
   m_TagString: Node
-  m_Icon: {fileID: -2349822300998112484, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -2042,13 +2241,16 @@ MonoBehaviour:
   active: 1
   smellLevel: 0
   smellType: 
+  smellThreshold: 8
+  maxSmell: 10
+  player: {fileID: 0}
 --- !u!23 &353361556
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 353361554}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_MotionVectors: 1
@@ -2191,10 +2393,10 @@ GameObject:
   - component: {fileID: 412490450}
   - component: {fileID: 412490449}
   - component: {fileID: 412490448}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: Node19
   m_TagString: Node
-  m_Icon: {fileID: -2349822300998112484, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -2231,13 +2433,16 @@ MonoBehaviour:
   active: 1
   smellLevel: 0
   smellType: 
+  smellThreshold: 8
+  maxSmell: 10
+  player: {fileID: 0}
 --- !u!23 &412490449
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 412490446}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_MotionVectors: 1
@@ -2294,10 +2499,10 @@ GameObject:
   - component: {fileID: 467913843}
   - component: {fileID: 467913842}
   - component: {fileID: 467913841}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: Node12
   m_TagString: Node
-  m_Icon: {fileID: -2349822300998112484, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -2333,13 +2538,16 @@ MonoBehaviour:
   active: 1
   smellLevel: 0
   smellType: 
+  smellThreshold: 8
+  maxSmell: 10
+  player: {fileID: 0}
 --- !u!23 &467913842
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 467913839}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_MotionVectors: 1
@@ -2396,10 +2604,10 @@ GameObject:
   - component: {fileID: 479972795}
   - component: {fileID: 479972794}
   - component: {fileID: 479972793}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: Node14
   m_TagString: Node
-  m_Icon: {fileID: -2349822300998112484, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -2436,13 +2644,16 @@ MonoBehaviour:
   active: 1
   smellLevel: 0
   smellType: 
+  smellThreshold: 8
+  maxSmell: 10
+  player: {fileID: 0}
 --- !u!23 &479972794
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 479972791}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_MotionVectors: 1
@@ -2499,10 +2710,10 @@ GameObject:
   - component: {fileID: 507882209}
   - component: {fileID: 507882208}
   - component: {fileID: 507882207}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: Node40
   m_TagString: Node
-  m_Icon: {fileID: -2349822300998112484, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -2537,13 +2748,16 @@ MonoBehaviour:
   active: 1
   smellLevel: 0
   smellType: 
+  smellThreshold: 8
+  maxSmell: 10
+  player: {fileID: 0}
 --- !u!23 &507882208
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 507882205}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_MotionVectors: 1
@@ -2605,10 +2819,10 @@ GameObject:
   - component: {fileID: 621950611}
   - component: {fileID: 621950610}
   - component: {fileID: 621950609}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: Node18
   m_TagString: Node
-  m_Icon: {fileID: -2349822300998112484, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -2644,13 +2858,16 @@ MonoBehaviour:
   active: 1
   smellLevel: 0
   smellType: 
+  smellThreshold: 8
+  maxSmell: 10
+  player: {fileID: 0}
 --- !u!23 &621950610
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 621950607}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_MotionVectors: 1
@@ -2707,10 +2924,10 @@ GameObject:
   - component: {fileID: 671686779}
   - component: {fileID: 671686778}
   - component: {fileID: 671686777}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: Node15
   m_TagString: Node
-  m_Icon: {fileID: -2349822300998112484, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -2748,13 +2965,16 @@ MonoBehaviour:
   active: 1
   smellLevel: 0
   smellType: 
+  smellThreshold: 8
+  maxSmell: 10
+  player: {fileID: 0}
 --- !u!23 &671686778
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 671686775}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_MotionVectors: 1
@@ -2811,10 +3031,10 @@ GameObject:
   - component: {fileID: 679083696}
   - component: {fileID: 679083695}
   - component: {fileID: 679083694}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: Node6
   m_TagString: Node
-  m_Icon: {fileID: -2349822300998112484, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -2851,13 +3071,16 @@ MonoBehaviour:
   active: 1
   smellLevel: 0
   smellType: 
+  smellThreshold: 8
+  maxSmell: 10
+  player: {fileID: 0}
 --- !u!23 &679083695
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 679083692}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_MotionVectors: 1
@@ -2935,6 +3158,10 @@ Transform:
   - {fileID: 865667115}
   - {fileID: 160020737}
   - {fileID: 751652287}
+  - {fileID: 205411333}
+  - {fileID: 67292067}
+  - {fileID: 6141596}
+  - {fileID: 1873907779}
   m_Father: {fileID: 196485932}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3162,10 +3389,10 @@ GameObject:
   - component: {fileID: 786082510}
   - component: {fileID: 786082509}
   - component: {fileID: 786082508}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: Node48
   m_TagString: Node
-  m_Icon: {fileID: -2349822300998112484, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -3189,13 +3416,16 @@ MonoBehaviour:
   active: 1
   smellLevel: 0
   smellType: 
+  smellThreshold: 8
+  maxSmell: 10
+  player: {fileID: 0}
 --- !u!23 &786082509
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 786082507}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_MotionVectors: 1
@@ -3265,10 +3495,10 @@ GameObject:
   - component: {fileID: 797687646}
   - component: {fileID: 797687645}
   - component: {fileID: 797687644}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: Node50
   m_TagString: Node
-  m_Icon: {fileID: -2349822300998112484, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -3291,13 +3521,16 @@ MonoBehaviour:
   active: 1
   smellLevel: 0
   smellType: 
+  smellThreshold: 8
+  maxSmell: 10
+  player: {fileID: 0}
 --- !u!23 &797687645
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 797687643}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_MotionVectors: 1
@@ -3367,10 +3600,10 @@ GameObject:
   - component: {fileID: 825743349}
   - component: {fileID: 825743348}
   - component: {fileID: 825743347}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: Node44
   m_TagString: Node
-  m_Icon: {fileID: -2349822300998112484, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -3405,13 +3638,16 @@ MonoBehaviour:
   active: 1
   smellLevel: 0
   smellType: 
+  smellThreshold: 8
+  maxSmell: 10
+  player: {fileID: 0}
 --- !u!23 &825743348
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 825743345}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_MotionVectors: 1
@@ -3595,10 +3831,10 @@ GameObject:
   - component: {fileID: 866956709}
   - component: {fileID: 866956708}
   - component: {fileID: 866956707}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: Node5
   m_TagString: Node
-  m_Icon: {fileID: -2349822300998112484, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -3635,13 +3871,16 @@ MonoBehaviour:
   active: 1
   smellLevel: 0
   smellType: 
+  smellThreshold: 8
+  maxSmell: 10
+  player: {fileID: 0}
 --- !u!23 &866956708
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 866956705}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_MotionVectors: 1
@@ -3695,11 +3934,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4470470477755760, guid: fd06d864a78bd9a4980a748dd6c36703, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 6.89
+      value: 8.22
       objectReference: {fileID: 0}
     - target: {fileID: 4470470477755760, guid: fd06d864a78bd9a4980a748dd6c36703, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 13.1
+      value: 10.78
       objectReference: {fileID: 0}
     - target: {fileID: 4470470477755760, guid: fd06d864a78bd9a4980a748dd6c36703, type: 2}
       propertyPath: m_LocalPosition.z
@@ -3773,6 +4012,16 @@ Prefab:
       propertyPath: breaking
       value: 1.5
       objectReference: {fileID: 0}
+    - target: {fileID: 114894738231657518, guid: fd06d864a78bd9a4980a748dd6c36703,
+        type: 2}
+      propertyPath: stop
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114894738231657518, guid: fd06d864a78bd9a4980a748dd6c36703,
+        type: 2}
+      propertyPath: switcher
+      value: 9
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: fd06d864a78bd9a4980a748dd6c36703, type: 2}
   m_IsPrefabParent: 0
@@ -3788,10 +4037,10 @@ GameObject:
   - component: {fileID: 903019722}
   - component: {fileID: 903019721}
   - component: {fileID: 903019720}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: Node55
   m_TagString: Node
-  m_Icon: {fileID: -2349822300998112484, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -3812,13 +4061,16 @@ MonoBehaviour:
   active: 1
   smellLevel: 0
   smellType: 
+  smellThreshold: 8
+  maxSmell: 10
+  player: {fileID: 0}
 --- !u!23 &903019721
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 903019719}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_MotionVectors: 1
@@ -3888,10 +4140,10 @@ GameObject:
   - component: {fileID: 927711197}
   - component: {fileID: 927711196}
   - component: {fileID: 927711195}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: Node49
   m_TagString: Node
-  m_Icon: {fileID: -2349822300998112484, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -3914,13 +4166,16 @@ MonoBehaviour:
   active: 1
   smellLevel: 0
   smellType: 
+  smellThreshold: 8
+  maxSmell: 10
+  player: {fileID: 0}
 --- !u!23 &927711196
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 927711194}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_MotionVectors: 1
@@ -3990,10 +4245,10 @@ GameObject:
   - component: {fileID: 951898483}
   - component: {fileID: 951898482}
   - component: {fileID: 951898481}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: Node10
   m_TagString: Node
-  m_Icon: {fileID: -2349822300998112484, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -4031,13 +4286,16 @@ MonoBehaviour:
   active: 1
   smellLevel: 0
   smellType: 
+  smellThreshold: 8
+  maxSmell: 10
+  player: {fileID: 0}
 --- !u!23 &951898482
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 951898479}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_MotionVectors: 1
@@ -4094,10 +4352,10 @@ GameObject:
   - component: {fileID: 1003755808}
   - component: {fileID: 1003755807}
   - component: {fileID: 1003755806}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: Node32
   m_TagString: Node
-  m_Icon: {fileID: -2349822300998112484, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -4133,13 +4391,16 @@ MonoBehaviour:
   active: 1
   smellLevel: 0
   smellType: 
+  smellThreshold: 8
+  maxSmell: 10
+  player: {fileID: 0}
 --- !u!23 &1003755807
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1003755804}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_MotionVectors: 1
@@ -4183,6 +4444,170 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1003755804}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1015331871
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1015331872}
+  - component: {fileID: 1015331875}
+  - component: {fileID: 1015331874}
+  - component: {fileID: 1015331873}
+  m_Layer: 8
+  m_Name: ObstacleCube
+  m_TagString: Obstacle
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
+  m_IsActive: 1
+--- !u!4 &1015331872
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1015331871}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.007, z: -0.01}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 205411333}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!23 &1015331873
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1015331871}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_Materials:
+  - {fileID: 2100000, guid: 1270ee5205a2eeb4986dbad5eb082eae, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 1
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+--- !u!65 &1015331874
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1015331871}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!33 &1015331875
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1015331871}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1024389824
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1024389825}
+  - component: {fileID: 1024389828}
+  - component: {fileID: 1024389827}
+  - component: {fileID: 1024389826}
+  m_Layer: 8
+  m_Name: ObstacleCube
+  m_TagString: Obstacle
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
+  m_IsActive: 1
+--- !u!4 &1024389825
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1024389824}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1873907779}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!23 &1024389826
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1024389824}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_Materials:
+  - {fileID: 2100000, guid: 1270ee5205a2eeb4986dbad5eb082eae, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 1
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+--- !u!65 &1024389827
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1024389824}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!33 &1024389828
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1024389824}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &1068284816
 GameObject:
@@ -4246,10 +4671,10 @@ GameObject:
   - component: {fileID: 1086997909}
   - component: {fileID: 1086997908}
   - component: {fileID: 1086997907}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: Node22
   m_TagString: Node
-  m_Icon: {fileID: -2349822300998112484, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -4273,13 +4698,16 @@ MonoBehaviour:
   active: 1
   smellLevel: 0
   smellType: 
+  smellThreshold: 8
+  maxSmell: 10
+  player: {fileID: 0}
 --- !u!23 &1086997908
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1086997906}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_MotionVectors: 1
@@ -4431,10 +4859,10 @@ GameObject:
   - component: {fileID: 1163161635}
   - component: {fileID: 1163161634}
   - component: {fileID: 1163161633}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: Node53
   m_TagString: Node
-  m_Icon: {fileID: -2349822300998112484, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -4470,13 +4898,16 @@ MonoBehaviour:
   active: 1
   smellLevel: 0
   smellType: 
+  smellThreshold: 8
+  maxSmell: 10
+  player: {fileID: 0}
 --- !u!23 &1163161634
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1163161631}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_MotionVectors: 1
@@ -4533,10 +4964,10 @@ GameObject:
   - component: {fileID: 1186211253}
   - component: {fileID: 1186211252}
   - component: {fileID: 1186211251}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: Node52
   m_TagString: Node
-  m_Icon: {fileID: -2349822300998112484, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -4560,13 +4991,16 @@ MonoBehaviour:
   active: 1
   smellLevel: 0
   smellType: 
+  smellThreshold: 8
+  maxSmell: 10
+  player: {fileID: 0}
 --- !u!23 &1186211252
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1186211250}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_MotionVectors: 1
@@ -4719,10 +5153,10 @@ GameObject:
   - component: {fileID: 1209530398}
   - component: {fileID: 1209530397}
   - component: {fileID: 1209530396}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: Node30
   m_TagString: Node
-  m_Icon: {fileID: -2349822300998112484, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -4744,13 +5178,16 @@ MonoBehaviour:
   active: 1
   smellLevel: 0
   smellType: 
+  smellThreshold: 8
+  maxSmell: 10
+  player: {fileID: 0}
 --- !u!23 &1209530397
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1209530395}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_MotionVectors: 1
@@ -4820,10 +5257,10 @@ GameObject:
   - component: {fileID: 1245749380}
   - component: {fileID: 1245749379}
   - component: {fileID: 1245749378}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: Node45
   m_TagString: Node
-  m_Icon: {fileID: -2349822300998112484, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -4860,13 +5297,16 @@ MonoBehaviour:
   active: 1
   smellLevel: 0
   smellType: 
+  smellThreshold: 8
+  maxSmell: 10
+  player: {fileID: 0}
 --- !u!23 &1245749379
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1245749376}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_MotionVectors: 1
@@ -4997,10 +5437,10 @@ GameObject:
   - component: {fileID: 1271529622}
   - component: {fileID: 1271529621}
   - component: {fileID: 1271529620}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: Node9
   m_TagString: Node
-  m_Icon: {fileID: -2349822300998112484, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -5038,13 +5478,16 @@ MonoBehaviour:
   active: 1
   smellLevel: 0
   smellType: 
+  smellThreshold: 8
+  maxSmell: 10
+  player: {fileID: 0}
 --- !u!23 &1271529621
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1271529618}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_MotionVectors: 1
@@ -5101,10 +5544,10 @@ GameObject:
   - component: {fileID: 1293051544}
   - component: {fileID: 1293051543}
   - component: {fileID: 1293051542}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: Node25
   m_TagString: Node
-  m_Icon: {fileID: -2349822300998112484, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -5140,13 +5583,16 @@ MonoBehaviour:
   active: 1
   smellLevel: 0
   smellType: 
+  smellThreshold: 8
+  maxSmell: 10
+  player: {fileID: 0}
 --- !u!23 &1293051543
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1293051540}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_MotionVectors: 1
@@ -5280,10 +5726,10 @@ GameObject:
   - component: {fileID: 1322204468}
   - component: {fileID: 1322204467}
   - component: {fileID: 1322204466}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: Node8
   m_TagString: Node
-  m_Icon: {fileID: -2349822300998112484, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -5319,13 +5765,16 @@ MonoBehaviour:
   active: 1
   smellLevel: 0
   smellType: 
+  smellThreshold: 8
+  maxSmell: 10
+  player: {fileID: 0}
 --- !u!23 &1322204467
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1322204464}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_MotionVectors: 1
@@ -5382,10 +5831,10 @@ GameObject:
   - component: {fileID: 1342072421}
   - component: {fileID: 1342072420}
   - component: {fileID: 1342072419}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: Node42
   m_TagString: Node
-  m_Icon: {fileID: -2349822300998112484, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -5407,13 +5856,16 @@ MonoBehaviour:
   active: 1
   smellLevel: 0
   smellType: 
+  smellThreshold: 8
+  maxSmell: 10
+  player: {fileID: 0}
 --- !u!23 &1342072420
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1342072418}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_MotionVectors: 1
@@ -5483,10 +5935,10 @@ GameObject:
   - component: {fileID: 1348702684}
   - component: {fileID: 1348702683}
   - component: {fileID: 1348702682}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: Node28
   m_TagString: Node
-  m_Icon: {fileID: -2349822300998112484, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -5524,13 +5976,16 @@ MonoBehaviour:
   active: 1
   smellLevel: 0
   smellType: 
+  smellThreshold: 8
+  maxSmell: 10
+  player: {fileID: 0}
 --- !u!23 &1348702683
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1348702680}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_MotionVectors: 1
@@ -5574,6 +6029,88 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1348702680}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1383363689
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1383363690}
+  - component: {fileID: 1383363693}
+  - component: {fileID: 1383363692}
+  - component: {fileID: 1383363691}
+  m_Layer: 8
+  m_Name: ObstacleCube
+  m_TagString: Obstacle
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
+  m_IsActive: 1
+--- !u!4 &1383363690
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1383363689}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 67292067}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!23 &1383363691
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1383363689}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_Materials:
+  - {fileID: 2100000, guid: 1270ee5205a2eeb4986dbad5eb082eae, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 1
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+--- !u!65 &1383363692
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1383363689}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!33 &1383363693
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1383363689}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &1395060375
 GameObject:
@@ -5718,7 +6255,7 @@ Prefab:
     - target: {fileID: 114118882840800522, guid: fd06d864a78bd9a4980a748dd6c36703,
         type: 2}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114894738231657518, guid: fd06d864a78bd9a4980a748dd6c36703,
         type: 2}
@@ -5739,6 +6276,11 @@ Prefab:
         type: 2}
       propertyPath: pathColor.g
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114894738231657518, guid: fd06d864a78bd9a4980a748dd6c36703,
+        type: 2}
+      propertyPath: stop
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: fd06d864a78bd9a4980a748dd6c36703, type: 2}
@@ -5786,10 +6328,10 @@ GameObject:
   - component: {fileID: 1469076809}
   - component: {fileID: 1469076808}
   - component: {fileID: 1469076807}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: Node47
   m_TagString: Node
-  m_Icon: {fileID: -2349822300998112484, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -5812,13 +6354,16 @@ MonoBehaviour:
   active: 1
   smellLevel: 0
   smellType: 
+  smellThreshold: 8
+  maxSmell: 10
+  player: {fileID: 0}
 --- !u!23 &1469076808
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1469076806}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_MotionVectors: 1
@@ -5920,10 +6465,10 @@ GameObject:
   - component: {fileID: 1491304098}
   - component: {fileID: 1491304097}
   - component: {fileID: 1491304096}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: Node27
   m_TagString: Node
-  m_Icon: {fileID: -2349822300998112484, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -5946,13 +6491,16 @@ MonoBehaviour:
   active: 1
   smellLevel: 0
   smellType: 
+  smellThreshold: 8
+  maxSmell: 10
+  player: {fileID: 0}
 --- !u!23 &1491304097
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1491304095}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_MotionVectors: 1
@@ -6004,7 +6552,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1491304095}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 25.67, y: 3.81, z: 0}
+  m_LocalPosition: {x: 26.91, y: 3.84, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1817574880}
@@ -6022,10 +6570,10 @@ GameObject:
   - component: {fileID: 1497222921}
   - component: {fileID: 1497222920}
   - component: {fileID: 1497222919}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: Node39
   m_TagString: Node
-  m_Icon: {fileID: -2349822300998112484, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -6062,13 +6610,16 @@ MonoBehaviour:
   active: 1
   smellLevel: 0
   smellType: 
+  smellThreshold: 8
+  maxSmell: 10
+  player: {fileID: 0}
 --- !u!23 &1497222920
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1497222917}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_MotionVectors: 1
@@ -6195,10 +6746,10 @@ GameObject:
   - component: {fileID: 1519095656}
   - component: {fileID: 1519095655}
   - component: {fileID: 1519095654}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: Node36
   m_TagString: Node
-  m_Icon: {fileID: -2349822300998112484, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -6235,13 +6786,16 @@ MonoBehaviour:
   active: 1
   smellLevel: 0
   smellType: 
+  smellThreshold: 8
+  maxSmell: 10
+  player: {fileID: 0}
 --- !u!23 &1519095655
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1519095652}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_MotionVectors: 1
@@ -6343,10 +6897,10 @@ GameObject:
   - component: {fileID: 1590473599}
   - component: {fileID: 1590473598}
   - component: {fileID: 1590473597}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: Node29
   m_TagString: Node
-  m_Icon: {fileID: -2349822300998112484, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -6368,13 +6922,16 @@ MonoBehaviour:
   active: 1
   smellLevel: 0
   smellType: 
+  smellThreshold: 8
+  maxSmell: 10
+  player: {fileID: 0}
 --- !u!23 &1590473598
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1590473596}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_MotionVectors: 1
@@ -6444,10 +7001,10 @@ GameObject:
   - component: {fileID: 1609109185}
   - component: {fileID: 1609109184}
   - component: {fileID: 1609109187}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: Node0
   m_TagString: Node
-  m_Icon: {fileID: -2349822300998112484, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -6470,7 +7027,7 @@ MeshRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1609109182}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_MotionVectors: 1
@@ -6533,6 +7090,9 @@ MonoBehaviour:
   active: 1
   smellLevel: 0
   smellType: 
+  smellThreshold: 8
+  maxSmell: 10
+  player: {fileID: 0}
 --- !u!1 &1642080225
 GameObject:
   m_ObjectHideFlags: 0
@@ -6627,10 +7187,10 @@ GameObject:
   - component: {fileID: 1691918072}
   - component: {fileID: 1691918071}
   - component: {fileID: 1691918070}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: Node43
   m_TagString: Node
-  m_Icon: {fileID: -2349822300998112484, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -6665,13 +7225,16 @@ MonoBehaviour:
   active: 1
   smellLevel: 0
   smellType: 
+  smellThreshold: 8
+  maxSmell: 10
+  player: {fileID: 0}
 --- !u!23 &1691918071
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1691918068}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_MotionVectors: 1
@@ -6728,10 +7291,10 @@ GameObject:
   - component: {fileID: 1702180460}
   - component: {fileID: 1702180459}
   - component: {fileID: 1702180458}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: Node31
   m_TagString: Node
-  m_Icon: {fileID: -2349822300998112484, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -6754,13 +7317,16 @@ MonoBehaviour:
   active: 1
   smellLevel: 0
   smellType: 
+  smellThreshold: 8
+  maxSmell: 10
+  player: {fileID: 0}
 --- !u!23 &1702180459
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1702180457}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_MotionVectors: 1
@@ -6830,10 +7396,10 @@ GameObject:
   - component: {fileID: 1772864466}
   - component: {fileID: 1772864465}
   - component: {fileID: 1772864464}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: Node37
   m_TagString: Node
-  m_Icon: {fileID: -2349822300998112484, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -6870,13 +7436,16 @@ MonoBehaviour:
   active: 1
   smellLevel: 0
   smellType: 
+  smellThreshold: 8
+  maxSmell: 10
+  player: {fileID: 0}
 --- !u!23 &1772864465
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1772864462}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_MotionVectors: 1
@@ -7081,7 +7650,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1817574880}
   - component: {fileID: 1817574879}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: NavMesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7224,6 +7793,51 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4759a15b1db9e62479ce146d718895c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1873907778
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1873907779}
+  - component: {fileID: 1873907780}
+  m_Layer: 8
+  m_Name: Obstacle2 (2)
+  m_TagString: Obstacle
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1873907779
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1873907778}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -10.96, y: 2.02, z: 0}
+  m_LocalScale: {x: 0.17500056, y: 16.2052, z: 1}
+  m_Children:
+  - {fileID: 1024389825}
+  m_Father: {fileID: 716518738}
+  m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!54 &1873907780
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1873907778}
+  serializedVersion: 2
+  m_Mass: 999
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 118
+  m_CollisionDetection: 0
 --- !u!1 &1874137417
 GameObject:
   m_ObjectHideFlags: 0
@@ -7236,10 +7850,10 @@ GameObject:
   - component: {fileID: 1874137420}
   - component: {fileID: 1874137419}
   - component: {fileID: 1874137418}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: Node35
   m_TagString: Node
-  m_Icon: {fileID: -2349822300998112484, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -7263,13 +7877,16 @@ MonoBehaviour:
   active: 1
   smellLevel: 0
   smellType: 
+  smellThreshold: 8
+  maxSmell: 10
+  player: {fileID: 0}
 --- !u!23 &1874137419
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1874137417}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_MotionVectors: 1
@@ -7339,10 +7956,10 @@ GameObject:
   - component: {fileID: 1877384196}
   - component: {fileID: 1877384195}
   - component: {fileID: 1877384194}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: Node34
   m_TagString: Node
-  m_Icon: {fileID: -2349822300998112484, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -7367,13 +7984,16 @@ MonoBehaviour:
   active: 1
   smellLevel: 0
   smellType: 
+  smellThreshold: 8
+  maxSmell: 10
+  player: {fileID: 0}
 --- !u!23 &1877384195
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1877384193}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_MotionVectors: 1
@@ -7500,6 +8120,88 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4759a15b1db9e62479ce146d718895c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1914452988
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1914452989}
+  - component: {fileID: 1914452992}
+  - component: {fileID: 1914452991}
+  - component: {fileID: 1914452990}
+  m_Layer: 8
+  m_Name: ObstacleCube
+  m_TagString: Obstacle
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
+  m_IsActive: 1
+--- !u!4 &1914452989
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1914452988}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.007, z: -0.01}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6141596}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!23 &1914452990
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1914452988}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_Materials:
+  - {fileID: 2100000, guid: 1270ee5205a2eeb4986dbad5eb082eae, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 1
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+--- !u!65 &1914452991
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1914452988}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!33 &1914452992
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1914452988}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &1952473044
 GameObject:
   m_ObjectHideFlags: 0
@@ -7512,10 +8214,10 @@ GameObject:
   - component: {fileID: 1952473047}
   - component: {fileID: 1952473046}
   - component: {fileID: 1952473049}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: Node1
   m_TagString: Node
-  m_Icon: {fileID: -2349822300998112484, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -7538,7 +8240,7 @@ MeshRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1952473044}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_MotionVectors: 1
@@ -7601,6 +8303,9 @@ MonoBehaviour:
   active: 1
   smellLevel: 0
   smellType: 
+  smellThreshold: 8
+  maxSmell: 10
+  player: {fileID: 0}
 --- !u!1 &1953406074
 GameObject:
   m_ObjectHideFlags: 0
@@ -7740,10 +8445,10 @@ GameObject:
   - component: {fileID: 1989177020}
   - component: {fileID: 1989177019}
   - component: {fileID: 1989177018}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: Node7
   m_TagString: Node
-  m_Icon: {fileID: -2349822300998112484, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -7780,13 +8485,16 @@ MonoBehaviour:
   active: 1
   smellLevel: 0
   smellType: 
+  smellThreshold: 8
+  maxSmell: 10
+  player: {fileID: 0}
 --- !u!23 &1989177019
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1989177016}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_MotionVectors: 1
@@ -7843,10 +8551,10 @@ GameObject:
   - component: {fileID: 1991316806}
   - component: {fileID: 1991316805}
   - component: {fileID: 1991316804}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: Node46
   m_TagString: Node
-  m_Icon: {fileID: -2349822300998112484, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -7881,13 +8589,16 @@ MonoBehaviour:
   active: 1
   smellLevel: 0
   smellType: 
+  smellThreshold: 8
+  maxSmell: 10
+  player: {fileID: 0}
 --- !u!23 &1991316805
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1991316802}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_MotionVectors: 1
@@ -7944,10 +8655,10 @@ GameObject:
   - component: {fileID: 2007121603}
   - component: {fileID: 2007121602}
   - component: {fileID: 2007121601}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: Node51
   m_TagString: Node
-  m_Icon: {fileID: -2349822300998112484, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -7971,13 +8682,16 @@ MonoBehaviour:
   active: 1
   smellLevel: 0
   smellType: 
+  smellThreshold: 8
+  maxSmell: 10
+  player: {fileID: 0}
 --- !u!23 &2007121602
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2007121600}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_MotionVectors: 1
@@ -8047,10 +8761,10 @@ GameObject:
   - component: {fileID: 2055753216}
   - component: {fileID: 2055753215}
   - component: {fileID: 2055753214}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: Node11
   m_TagString: Node
-  m_Icon: {fileID: -2349822300998112484, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -8089,13 +8803,16 @@ MonoBehaviour:
   active: 1
   smellLevel: 0
   smellType: 
+  smellThreshold: 8
+  maxSmell: 10
+  player: {fileID: 0}
 --- !u!23 &2055753215
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2055753212}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_MotionVectors: 1

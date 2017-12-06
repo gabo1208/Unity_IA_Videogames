@@ -1,0 +1,8 @@
+# Ignore everything
+*
+
+# But not this file
+!.gitignore
+
+# Neither files in this sub directory
+!Assets/

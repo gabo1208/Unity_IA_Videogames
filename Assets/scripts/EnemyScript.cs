@@ -21,9 +21,26 @@ public class EnemyScript : MonoBehaviour
     private float maxAngle = 45.0f;
     private float angle = 0f;
     public List<GameObject> path;
+    public List<GameObject> pathSmell;
     private GameObject[] closers;
     private Vector3 direction, target;
     private NavMeshScript navmeshScript;
+    // position initial
+    private Vector3 posinit;
+    private Vector3 posToPatrol;
+    // State Machine variables
+    public enum state {
+        patrol,
+        resting,
+        follow,
+        smell,
+    };
+
+    public state myState;
+    private bool turnSee = false;
+    private float patrolingTime = 9f;
+    private float restingTime = 1.5f;
+    private float tiredCd;
 
     // State machine variables
     public float initx;
@@ -33,9 +50,11 @@ public class EnemyScript : MonoBehaviour
     public bool targetSpotted = false;
     public bool smellDetected = false;
     public bool targetScaped = true;
+    public bool chasing = false;
 
     private void Start()
     {
+
         initx = transform.localScale.x;
         inity = transform.localScale.y;
         // we need to know where player is
@@ -48,10 +67,24 @@ public class EnemyScript : MonoBehaviour
         weapon.enabled = false;
         // render triangle
         navmeshScript = GetComponent<NavMeshScript>();
+
+        posinit = transform.position;
+        posToPatrol = new Vector3(posinit.x + 1, posinit.y + 3, posinit.z );
+        myState = state.patrol;
+        tiredCd = patrolingTime;
     }
 
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.T)){
+                weapon.enabled = !weapon.enabled;
+            }
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            turnSee = !turnSee;
+        }
+
+        Vector3 targetDir = (player.transform.position - transform.position);
         /* if not path following, choose behaviors
         if (switcher != 9){
             target = player.transform.position;
@@ -96,16 +129,25 @@ public class EnemyScript : MonoBehaviour
             shoot();
         }
 
-        separation();
-        controlVelocity(direction);
-        //collitionRays(direction);
+        if (tiredCd > 0)
+        {
+            tiredCd -= Time.deltaTime;
+        }
 
+        statesMachine();
+
+        separation();
+        //controlVelocity(direction);
+        collitionRays(targetDir);
+
+        // QUITA EL PATH FOLLOWING Y PON LO DE PURSUE O FOLLOW O PATHFOLLOWING EN LA STATE MACHINE
+   
         // call to behavior choose
-        switch (switcher){
-            case 9:
-                //"Follow Path"
-                pathFollowing();
-                break;
+        //switch (switcher){
+        //    case 9:
+        //        //"Follow Path"
+        //        pathFollowing();
+        //        break;
             /*case 8:
                 //"Pursue"
                 pursue(direction);
@@ -141,9 +183,9 @@ public class EnemyScript : MonoBehaviour
                 //"Alinear"
                 align();
                 break;*/
-            default:
-                break;
-        }
+        //    default:
+        //        break;
+        //}
     }
 
     // Wander movement
@@ -270,6 +312,7 @@ public class EnemyScript : MonoBehaviour
             direction = target - transform.position;
             if (direction.magnitude > pathThreshold){
                 faceTo(direction);
+                controlVelocity(direction);
                 dynamicSeek();
             } else {
                 if (path.Count > 0){
@@ -278,6 +321,26 @@ public class EnemyScript : MonoBehaviour
                 }
                 navmeshScript.removeFirstInPath();
             }
+        }
+    }
+
+    private void patroling()
+    {
+        Vector3 case1 = transform.position - posinit;
+        Vector3 case2 = transform.position - posToPatrol;
+
+        if (-0.75f <= case1.magnitude && case1.magnitude <= 0.75f){
+            target = posToPatrol;
+        } else if (-0.75f <= case2.magnitude && case2.magnitude <= 0.75f){
+            target = posinit;
+        }
+
+        direction = target - transform.position;
+        if (direction.magnitude > pathThreshold)
+        {
+            faceTo(direction);
+            controlVelocity(direction);
+            dynamicSeek();
         }
     }
 
@@ -318,37 +381,81 @@ public class EnemyScript : MonoBehaviour
     private void collitionRays(Vector3 direction){
         float cosadd = 0.349066f, sinadd = 0.349066f;
         int lm = 1 << LayerMask.NameToLayer("Objects");
+        Color seeColor = Color.red;
         Vector3 leftD, rightD;
         RaycastHit hitl, hit, hitr;
+        bool close = direction.magnitude <= 8f;
+        direction = direction.normalized;
 
         // Ajuste de angulos para los rayos de colision
+        // Top left
         if (transform.up.x < 0 && transform.up.y > 0){
             leftD = new Vector3(Mathf.Cos(Mathf.Acos(transform.up.x) + cosadd),
                 Mathf.Sin(Mathf.Asin(transform.up.y) - sinadd), 0);
             rightD = new Vector3(Mathf.Cos(Mathf.Acos(transform.up.x) - cosadd),
-                Mathf.Sin(Mathf.Asin(transform.up.y) + sinadd), 0);
+                Mathf.Sin(Mathf.Asin(transform.up.y) + sinadd), 0).normalized;
+
+            if (close)
+            {
+                if (direction.x >= leftD.x && direction.x <= rightD.x && direction.y >= leftD.y && direction.y <= rightD.y)
+                {
+                    turnSee = true;
+                    seeColor = Color.green;
+                }
+            }
+        // Bottom Right
         } else if (transform.up.y < 0 && transform.up.x > 0) {
             leftD = new Vector3(Mathf.Cos(Mathf.Acos(transform.up.x) - cosadd),
                 Mathf.Sin(Mathf.Asin(transform.up.y) + sinadd), 0);
             rightD = new Vector3(Mathf.Cos(Mathf.Acos(transform.up.x) + cosadd),
-                Mathf.Sin(Mathf.Asin(transform.up.y) - sinadd), 0);
+                Mathf.Sin(Mathf.Asin(transform.up.y) - sinadd), 0).normalized;
+            if (close)
+            {
+                if (direction.x <= leftD.x && direction.x >= rightD.x && direction.y <= leftD.y && direction.y >= rightD.y)
+                {
+                    turnSee = true;
+                    seeColor = Color.green;
+                }
+            }
+            // Bottom left
         } else if (transform.up.x <= 0) {
             leftD = new Vector3(Mathf.Cos(Mathf.Acos(transform.up.x) - cosadd),
                 Mathf.Sin(Mathf.Asin(transform.up.y) - sinadd), 0);
             rightD = new Vector3(Mathf.Cos(Mathf.Acos(transform.up.x) + cosadd),
-                Mathf.Sin(Mathf.Asin(transform.up.y) + sinadd), 0);
+                Mathf.Sin(Mathf.Asin(transform.up.y) + sinadd), 0).normalized;
+
+            if (close)
+            {
+                if (direction.x <= leftD.x && direction.x >= rightD.x && direction.y >= leftD.y && direction.y <= rightD.y)
+                {
+                    turnSee = true;
+                    seeColor = Color.green;
+                }
+            }
+            // Top Right
         } else {
             leftD = new Vector3(Mathf.Cos(Mathf.Acos(transform.up.x) + cosadd),
                 Mathf.Sin(Mathf.Asin(transform.up.y) + sinadd), 0);
             rightD = new Vector3(Mathf.Cos(Mathf.Acos(transform.up.x) - cosadd),
-                Mathf.Sin(Mathf.Asin(transform.up.y) - sinadd), 0);
+                Mathf.Sin(Mathf.Asin(transform.up.y) - sinadd), 0).normalized;
+
+            if (close)
+            {
+                if (direction.x >= leftD.x && direction.x <= rightD.x && direction.y <= leftD.y && direction.y >= rightD.y)
+                {
+                    turnSee = true;
+                    seeColor = Color.green;
+                }
+            }
         }
 
+        Debug.DrawRay(transform.position, direction.normalized * 6f, seeColor);
+        
         // Left ray collides
         if (Physics.Raycast(transform.position, leftD, out hitl, 2f, lm)){
             Debug.DrawRay(transform.position, leftD * 2, Color.red);
-            Debug.DrawRay(transform.position, hitl.normal * 2.5f, Color.blue);
-            separateFromTarget(hitl.point);
+            //Debug.DrawRay(transform.position, hitl.normal * 2.5f, Color.blue);
+            //separateFromTarget(hitl.point);
         } else {
             Debug.DrawRay(transform.position, leftD * 2, Color.green);
         }
@@ -356,8 +463,8 @@ public class EnemyScript : MonoBehaviour
         // Rigth ray collides
         if (Physics.Raycast(transform.position, rightD, out hitr, 2f, lm)){
             Debug.DrawRay(transform.position, rightD * 2, Color.red);
-            Debug.DrawRay(transform.position, hitr.normal * 2.5f, Color.blue);
-            separateFromTarget(hitr.point);
+            //Debug.DrawRay(transform.position, hitr.normal * 2.5f, Color.blue);
+            //separateFromTarget(hitr.point);
         } else {
             Debug.DrawRay(transform.position, rightD * 2, Color.green);
         }
@@ -365,10 +472,93 @@ public class EnemyScript : MonoBehaviour
         // Center ray collides
         if (Physics.Raycast(transform.position, transform.up, out hit, 2.5f, lm)) {
             Debug.DrawRay(transform.position, transform.up * 2.5f, Color.red);
-            Debug.DrawRay(transform.position, hit.normal * 2.5f, Color.blue);
-            separateFromTarget(hit.point);
+            //Debug.DrawRay(transform.position, hit.normal * 2.5f, Color.blue);
+            //separateFromTarget(hit.point);
         } else {
             Debug.DrawRay(transform.position, transform.up * 2.5f, Color.green);
         }
+    }
+
+    private void statesMachine(){
+
+        // Se esta patrullando
+        if (myState == state.patrol){
+            if (tiredSwitch) {
+                myState = state.resting;
+                tiredCd = restingTime;
+            }
+            if (canSmell())
+            {
+                myState = state.smell;
+            }
+            if (canSeePlayer()){
+                myState = state.follow;
+            }
+            patroling();
+        }
+        // Se esta descansando
+        else if (myState == state.resting){
+            if (tiredSwitch){
+                myState = state.patrol;
+                tiredCd = patrolingTime;
+            }
+            // quizas este deberia estar dentro del tiredSwitch, para que cuando este descansando respete el descanso (?)
+            if (canSeePlayer()){
+                myState = state.follow;
+            }
+        }
+        // Se esta persiguiendo
+        else if (myState == state.follow){
+            Vector3 playerpos = player.transform.position;
+            Vector3 localDir = playerpos - transform.position;
+            if (!canSeePlayer()){
+                myState = state.patrol;
+                tiredCd = patrolingTime;
+            }
+            if (localDir.magnitude >= 3f){
+                chasing = true;
+                faceTo(direction);
+                pathFollowing();
+            } else if (localDir.magnitude < 3f) {
+                chasing = false;
+                pursue(localDir);
+            } else
+            {
+                myState = state.resting;
+                tiredCd = restingTime;
+            }
+            
+        }
+        // Se esta persiguiendo por olor
+        else if (myState == state.smell){
+            if (canSeePlayer()){
+                myState = state.follow;
+            }
+        }
+    }
+
+    private bool tiredSwitch{
+        get
+        {
+            return tiredCd <= 0f;
+        }
+    }
+
+    public bool canSeePlayer(){
+        //Vector3 plPos = player.transform.position;
+        //int lm = 1 << LayerMask.NameToLayer("Objects");
+        //RaycastHit notSee;
+
+        //if (Physics.Raycast(transform.position, plPos, out notSee, 2.5f, lm)){
+        //    return false;
+        //}
+
+        return turnSee;
+
+    }
+
+    private bool canSmell()
+    {
+        return false;
     }
 }
