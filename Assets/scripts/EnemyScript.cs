@@ -324,6 +324,30 @@ public class EnemyScript : MonoBehaviour
         }
     }
 
+    public void smellPathFollowing()
+    {
+        if (pathSmell.Count > 0)
+        {
+            target = pathSmell[0].transform.position;
+            direction = target - transform.position;
+            if (direction.magnitude > pathThreshold)
+            {
+                faceTo(direction);
+                controlVelocity(direction);
+                dynamicSeek();
+            }
+            else
+            {
+                if (pathSmell.Count > 0)
+                {
+                    pathSmell[0].GetComponent<NodeScript>().active = true;
+                    pathSmell.RemoveAt(0);
+                }
+                navmeshScript.removeFirstInPathSmell();
+            }
+        }
+    }
+
     private void patroling()
     {
         Vector3 case1 = transform.position - posinit;
@@ -383,8 +407,9 @@ public class EnemyScript : MonoBehaviour
         int lm = 1 << LayerMask.NameToLayer("Objects");
         Color seeColor = Color.red;
         Vector3 leftD, rightD;
-        RaycastHit hitl, hit, hitr;
+        RaycastHit hitl, hit, hitr, seehit;
         bool close = direction.magnitude <= 8f;
+        bool obstacle = Physics.Raycast(transform.position, direction.normalized, out seehit, 5f, lm);
         direction = direction.normalized;
 
         // Ajuste de angulos para los rayos de colision
@@ -395,7 +420,7 @@ public class EnemyScript : MonoBehaviour
             rightD = new Vector3(Mathf.Cos(Mathf.Acos(transform.up.x) - cosadd),
                 Mathf.Sin(Mathf.Asin(transform.up.y) + sinadd), 0).normalized;
 
-            if (close)
+            if (close && !obstacle)
             {
                 if (direction.x >= leftD.x && direction.x <= rightD.x && direction.y >= leftD.y && direction.y <= rightD.y)
                 {
@@ -409,7 +434,7 @@ public class EnemyScript : MonoBehaviour
                 Mathf.Sin(Mathf.Asin(transform.up.y) + sinadd), 0);
             rightD = new Vector3(Mathf.Cos(Mathf.Acos(transform.up.x) + cosadd),
                 Mathf.Sin(Mathf.Asin(transform.up.y) - sinadd), 0).normalized;
-            if (close)
+            if (close && !obstacle)
             {
                 if (direction.x <= leftD.x && direction.x >= rightD.x && direction.y <= leftD.y && direction.y >= rightD.y)
                 {
@@ -424,7 +449,7 @@ public class EnemyScript : MonoBehaviour
             rightD = new Vector3(Mathf.Cos(Mathf.Acos(transform.up.x) + cosadd),
                 Mathf.Sin(Mathf.Asin(transform.up.y) + sinadd), 0).normalized;
 
-            if (close)
+            if (close && !obstacle)
             {
                 if (direction.x <= leftD.x && direction.x >= rightD.x && direction.y >= leftD.y && direction.y <= rightD.y)
                 {
@@ -439,7 +464,7 @@ public class EnemyScript : MonoBehaviour
             rightD = new Vector3(Mathf.Cos(Mathf.Acos(transform.up.x) - cosadd),
                 Mathf.Sin(Mathf.Asin(transform.up.y) - sinadd), 0).normalized;
 
-            if (close)
+            if (close && !obstacle)
             {
                 if (direction.x >= leftD.x && direction.x <= rightD.x && direction.y <= leftD.y && direction.y >= rightD.y)
                 {
@@ -483,25 +508,25 @@ public class EnemyScript : MonoBehaviour
 
         // Se esta patrullando
         if (myState == state.patrol){
-            if (tiredSwitch) {
+            /*if (tiredSwitch) {
                 myState = state.resting;
                 tiredCd = restingTime;
-            }
-            if (canSmell())
-            {
-                myState = state.smell;
-            }
+            }*/
             if (canSeePlayer()){
                 myState = state.follow;
+            }
+            else if (canSmell())
+            {
+                myState = state.smell;
             }
             patroling();
         }
         // Se esta descansando
         else if (myState == state.resting){
-            if (tiredSwitch){
+            /*if (tiredSwitch){
                 myState = state.patrol;
                 tiredCd = patrolingTime;
-            }
+            }*/
             // quizas este deberia estar dentro del tiredSwitch, para que cuando este descansando respete el descanso (?)
             if (canSeePlayer()){
                 myState = state.follow;
@@ -515,22 +540,39 @@ public class EnemyScript : MonoBehaviour
                 myState = state.patrol;
                 tiredCd = patrolingTime;
             }
-            if (localDir.magnitude >= 3f){
+            if (localDir.magnitude >= 3f && localDir.magnitude < 8f)
+            {
                 chasing = true;
-                faceTo(direction);
-                pathFollowing();
+                if (path.Count > 0)
+                {
+                    pathFollowing();
+                }
+                else
+                {
+                    faceTo(localDir);
+                    dynamicSeek();
+                }
             } else if (localDir.magnitude < 3f) {
                 chasing = false;
                 pursue(localDir);
             } else
             {
-                myState = state.resting;
-                tiredCd = restingTime;
+                turnSee = false;
             }
             
         }
         // Se esta persiguiendo por olor
         else if (myState == state.smell){
+            if (pathSmell.Count > 0)
+            {
+                smellPathFollowing();
+            }
+            else
+            {
+                myState = state.resting;
+                tiredCd = patrolingTime;
+            }
+ 
             if (canSeePlayer()){
                 myState = state.follow;
             }

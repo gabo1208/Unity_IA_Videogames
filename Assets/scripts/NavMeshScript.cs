@@ -55,12 +55,12 @@ public class NavMeshScript : MonoBehaviour {
             //Astar(endNode);
 
             // This modifies the path each time the target position change closer to other node
-            //starSmelling(startNode);
+            starSmelling(startNode);
 
-            //movementScript.pathSmell = new List<GameObject>(pathSmell);
+            movementScript.pathSmell = new List<GameObject>(pathSmell);
+            movementScript.myState = EnemyScript.state.smell;
 
             //movementScript.switcher = 9;
-            updateCurrent(endNode);
         }
         else
         {
@@ -74,7 +74,7 @@ public class NavMeshScript : MonoBehaviour {
             if (movementScript.path.Count > 0)
             {
                 movementScript.path.Clear();
-                //path.Clear();
+                path.Clear();
             }
             updateCurrent(endNode);
         }
@@ -291,7 +291,7 @@ public class NavMeshScript : MonoBehaviour {
             foreach (var neighbor in current.GetComponent<NodeScript>().conections)
             {
                 // ignore node if it is already a closed one
-                if (closedSet.Contains(neighbor))
+                if (closedSet.Contains(neighbor)  || smellHeuristic(neighbor) < pathThreshold)
                 {
                     continue;
                 }
